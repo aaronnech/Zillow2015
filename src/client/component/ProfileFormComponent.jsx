@@ -15,6 +15,13 @@ var ProfileFormComponent = React.createClass({
     },
 
     /**
+     * Updates the profile in localstorage
+     */
+    updateLocalProfile : function() {
+
+    },
+
+    /**
      * Called when age is changed
      */
     onAgeChange : function(ev) {

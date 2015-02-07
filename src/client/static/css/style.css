@@ -236,12 +236,31 @@ input {
 	padding: 20px;
 	background: #ade0e7;
 	text-align: center;
+	z-index: 20;
 }
 
 .butter-bar img {
 	float: right;
 	margin-top: 10px;
 }
+
+@keyframes blink {  
+    0% { background: #ade0e7; }
+    100% { background: #71c9d6; }
+}
+
+@-webkit-keyframes blink {
+    0% { background: #ade0e7; }
+    100% { background: #71c9d6; }
+}
+
+.blink {
+    -webkit-animation: blink 0.5s linear 2;
+    -moz-animation: blink 0.5s linear 2;
+    -ms-animation: blink 0.5s linear 2;
+    -o-animation: blink 0.5s linear 2;
+    animation: blink 0.5s linear 2;
+} 
 
 /**
  * Style revamp for checkboxes

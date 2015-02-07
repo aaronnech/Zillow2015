@@ -19,6 +19,7 @@ class API {
 	private timeoutCallback : Function;
 	private secret : string;
 	private nonce : string;
+	private firstLaunch : boolean;
 
 	private profile : Profile;
 	private filters : any;
@@ -34,6 +35,7 @@ class API {
 		this.baseUrl = baseUrl;
 		this.timeoutCallback = timeoutCallback;
 		this.secret = this.constructSecret();
+		this.butters = [];
 		this.profile = undefined;
 
 		var filters = JSON.parse(window.localStorage.getItem('filters'));
@@ -47,7 +49,9 @@ class API {
 		var nonce = window.localStorage.getItem('nonce');
 		if (nonce) {
 			this.nonce = nonce;
+			this.firstLaunch = false;
 		} else {
+			this.firstLaunch = true;
 			this.nonce = this.getNonce();
 			window.localStorage.setItem('nonce', this.nonce);
 		}
@@ -113,6 +117,15 @@ class API {
 	}
 
 	/**
+	 * Finds out if this is the first time a user has used the app.
+	 * @return {boolean} true if this is the first time a user has launched
+	 * the application, false otherwise.
+	 */
+	public isFirstLaunch() : boolean {
+		return this.firstLaunch;
+	}
+
+	/**
 	 * Gets the next butter bar message
 	 * @return {string} Message
 	 */
@@ -147,9 +160,13 @@ class API {
 	public getNextHomes(callback : Function) {
 		var filters = this.getFilterJSON();
 		var profile = this.profile.toJSON();
+		console.log(profile);
 
 		JQuery.get(this.baseUrl + '/home/',
-				{key : this.secret, nonce : this.nonce, filters : filters, profile : profile},
+				{key : this.secret,
+				 nonce : this.nonce,
+				 filters : filters,
+				 profile : profile},
 				(data) => {
 					if (!data.error) {
 						callback(data.homes.map((json) => {

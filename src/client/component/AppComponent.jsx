@@ -100,7 +100,7 @@ var AppComponent = React.createClass({
             <div id="app">
                 <HeaderComponent screen={this.state.active} />
                 <div className={"screen " + (isHome ? "active" : "")}>
-                    <ButterBarComponent />
+                    <ButterBarComponent API={this.state.API} />
                 	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>
