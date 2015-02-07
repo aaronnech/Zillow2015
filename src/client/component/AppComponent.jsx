@@ -80,7 +80,7 @@ var AppComponent = React.createClass({
         var navButtons = [
             {
                 icon : 'img/icon.house.png',
-                onClick : this.setScreenLater(Constants.SCREENS.HOME);
+                onClick : this.setScreenLater(Constants.SCREENS.HOME)
             },
             {
                 icon : 'img/icon.list.png',
