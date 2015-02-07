@@ -20,7 +20,8 @@ var ProfileFormComponent = React.createClass({
      * Updates the profile in localstorage
      */
     updateLocalProfile : function() {
-    	
+		var json = this.props.data.toJSON();
+		window.localStorage.setItem('profile', JSON.stringify(json));
     },
 
     /**
@@ -30,6 +31,7 @@ var ProfileFormComponent = React.createClass({
         if (ev.target.validity.valid) {
             if (ev.target.value > 0) {
                 this.props.data.setAge(ev.target.value);
+                this.updateLocalProfile();
             }
         }
     },
@@ -41,6 +43,7 @@ var ProfileFormComponent = React.createClass({
         if (ev.target.validity.valid) {
             if (ev.target.value > 0) {
                 this.props.data.setSalary(ev.target.value);
+                this.updateLocalProfile();
             }
         }
     },
@@ -60,9 +63,13 @@ var ProfileFormComponent = React.createClass({
 				</fieldset>
 				<fieldset>
 					<legend>HomeQuiz</legend>
-					<p style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>Take a quick housing quiz</p>
+					<p style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>
+						Tell us about which homes you prefer <button onClick={(function() { this.setState({showQuiz : true}) }).bind(this)}>START</button>
+					</p>
 					<p style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>Tap which one you prefer</p>
-                    <QuizComponent style={{'margin': 'auto'}} foo="bar" profile={profile} />
+                    <div style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>
+                    	<QuizComponent style={{'margin': 'auto'}} profile={profile} updateLocalProfile={this.updateLocalProfile} />
+                    </div>
 				</fieldset>
         	</div>
         );
