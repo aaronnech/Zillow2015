@@ -83,9 +83,9 @@ var LocationFilterComponent = React.createClass({
      * Called when distance is changed
      */
     onDistanceChange : function(ev) {
-        if (event.target.validity.valid) {
-            if (event.target.value > 0) {
-                this.setState({miles : event.target.value});
+        if (ev.target.validity.valid) {
+            if (ev.target.value > 0) {
+                this.setState({miles : ev.target.value});
             }
         }
     },
