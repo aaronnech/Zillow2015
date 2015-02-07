@@ -272,6 +272,11 @@ input {
 	margin-top: 10px;
 }
 
+.housepic {
+	max-height: 100px;
+	max-width: 100px;
+}
+
 
 
 @keyframes blink {  
