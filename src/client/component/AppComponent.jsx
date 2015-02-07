@@ -11,6 +11,7 @@ var SavedListComponent = require('./SavedListComponent.jsx');
 var FilterFormComponent = require('./FilterFormComponent.jsx');
 var ProfileFormComponent = require('./ProfileFormComponent.jsx');
 var ButterBarComponent = require('./ButterBarComponent.jsx');
+var HomeDetailComponent = require('./HomeDetailComponent.jsx');
 
 /**
  * Encapsulates the entire application

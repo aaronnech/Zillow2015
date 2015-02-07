@@ -11,10 +11,10 @@ var SavedListComponent = React.createClass({
 	 * @param  {any} item The item to pass to the callback
 	 * @return {Function} The thunk
 	 */
-	onClickLater : function(item) {
+	onClickLater : function(itemData) {
 		var self = this;
 		return function() {
-			self.props.onClickItem(item);
+			self.props.onClickItem(itemData);
 		};
 	},
 
