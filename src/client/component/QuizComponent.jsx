@@ -64,7 +64,6 @@ var QuizComponent = React.createClass({
 	 */
     render : function() {
     	var profile = this.props.profile;
-        console.log(this.props.foo);
 
         return (
         	<div className="quiz-component">
