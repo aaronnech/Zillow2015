@@ -17,10 +17,10 @@ var SavedHomeComponent = React.createClass({
 						  home.getBuyPrice() != undefined ? buyString : "";
 
         return (
-	        <li className="saved-home">
+	        <li className="saved-home" onClick={this.props.onClickItem} >
 	        	<img src={home.getImage() || Constants.DEFAULT_HOUSE_IMAGE} />
 	        	<p>{priceString}</p>
-	        	<img src="img/icon.remove.png" onClick={(function() {this.props.onRemoveHome(this)}).bind(this)} className="remove" />
+	        	<img src="img/icon.remove.png" onClick={(function(e) {this.props.onRemoveHome(this); e.stopPropagation();}).bind(this)} className="remove" />
 	        </li>
         );
 	}

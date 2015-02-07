@@ -82,7 +82,7 @@ var AppComponent = React.createClass({
      */
     onHomeDetail : function(home) {
         this.setState({detailHome : home});
-        this.setScreenLater(Constants.SCREENS.LIST)();
+        this.setScreenLater(Constants.SCREENS.DETAILS)();
     },
 
     /**

@@ -42,7 +42,7 @@ var SavedListComponent = React.createClass({
 	        	<ul className="saved">
 				{this.props.data.map(function(item, i) {
 					return (
-						<SavedHomeComponent onRemoveHome={this.onRemoveItem} onClick={this.onClickLater(item)} key={i} data={item} />
+						<SavedHomeComponent onRemoveHome={this.onRemoveItem} onClickItem={this.onClickLater(item)} key={i} data={item} />
 					);
 				}.bind(this))}
 	        	</ul>
