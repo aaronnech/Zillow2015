@@ -7,16 +7,20 @@ import AccessibleKingCountyPipeline = require('./pipeline/AccessibleKingCountyPi
  * and store it in the database.
  */
 class Harvester {
-	private pipelines : Pipeline[];
+	private sourcePipelines : Pipeline[];
+	private metaPipelines : Pipeline[];
 	private db : any;
 	private runningCount : number;
 	private finishedCallback : Function;
+	private metaRunning : number;
 
 	constructor(db : any) {
-		// TODO: Take database connection as parameter
-		this.pipelines = [
+		this.metaRunning = 0;
+		this.sourcePipelines = [
 			new CraigslistPipeline(),
 			new AccessibleKingCountyPipeline()
+		];
+		this.metaPipelines = [
 		];
 		this.db = db;
 	}
@@ -40,13 +44,36 @@ class Harvester {
 	 * @param {any} result   The resultant data
 	 */
 	private onFinishPipeline(pipeline : Pipeline, result : any) {
-		// Mark data source
+		// Post-process data source
 		for (var i = 0; i < result.length; i++) {
+			// Tag the data source on the home
 			result[i].source = pipeline.getName();
+
+			this.metaRunning += this.metaPipelines.length;
+
+			// Run all meta pipelines on these sources
+			for (var j = 0; j < this.metaPipelines.length; j++) {
+				var meta = this.metaPipelines[j];
+
+				meta.initialize(result[i]);
+
+				// Closure up the index
+				((meta, i, result) => {
+					meta.run((pipeline, metaTagged) => {
+						this.metaRunning--;
+
+						console.log('Finished meta pipeline : ' + pipeline.getName());
+						console.log('Meta Pipelines remaining : ' + this.metaRunning);
+
+						result[i] = metaTagged;
+					});
+				})(meta, i, result);
+			}
 		}
-		if (pipeline.getName() == 'Accessible King County Pipeline') {
-			console.log(result);
-		}
+
+
+		// Do nothing while the meta pipelines are running
+		while (this.metaRunning > 0) {}
 
 		// Insert data into database
 		this.db.insert(result, () => {
@@ -70,17 +97,17 @@ class Harvester {
 			console.log("Initializing Data Pipelines...");
 			
 			// Initialize all pipelines
-			for (var i = 0; i < this.pipelines.length; i++) {
-				this.pipelines[i].initialize();
+			for (var i = 0; i < this.sourcePipelines.length; i++) {
+				this.sourcePipelines[i].initialize();
 			}
 
 			// Run all pipelines
 			// TODO: Make multithreaded.
-			this.runningCount = this.pipelines.length;
+			this.runningCount = this.sourcePipelines.length;
 			this.finishedCallback = callback;
-			for (var i = 0; i < this.pipelines.length; i++) {
-				console.log("Starting Pipeline: " + this.pipelines[i].getName());
-				this.pipelines[i].run((pipeline, result) => {
+			for (var i = 0; i < this.sourcePipelines.length; i++) {
+				console.log("Starting Pipeline: " + this.sourcePipelines[i].getName());
+				this.sourcePipelines[i].run((pipeline, result) => {
 					console.log("Finished Pipeline: " + pipeline.getName());
 					console.log("Inserting Pipeline: " + pipeline.getName());
 					this.onFinishPipeline(pipeline, result);

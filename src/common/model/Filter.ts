@@ -5,15 +5,19 @@
 class Filter {
 	private allowed : Function;
 	private disabled : boolean;
+	private value : any;
 
 	/**
 	 * Constructs a new Filter
 	 * @param {Function} allowed The filter function
+	 * @param {any} value The value to pass the filter function
 	 */
-	constructor(allowed : Function, disabled? : boolean) {
+	constructor(allowed : Function, value : any, disabled? : boolean) {
 		if (typeof allowed == 'undefined' || !allowed) {
 			throw 'Illegal filter construction over a undefined function';
 		}
+
+		this.value = value
 		this.allowed = allowed;
 		this.disabled = disabled || false;
 	}
@@ -44,6 +48,22 @@ class Filter {
 	}
 
 	/**
+	 * Set the processing function value of this filter
+	 * @param {any} allowed The filter function value
+	 */
+	public setValue(value : any) {
+		this.value = value;
+	}
+
+	/**
+	 * Gets the disabled status of the filter
+	 * @return {boolean} true if it is disabled, false otherwise
+	 */
+	public isDisable() {
+		return this.disabled;
+	}
+
+	/**
 	 * Disables the filter, meaning the filter will let all elements pass.
 	 */
 	public disableFilter() {
@@ -64,6 +84,7 @@ class Filter {
 	public toJSON() : any {
 		return {
 			fn : this.allowed.toString(),
+			value : this.value,
 			disabled : this.disabled
 		}
 	}
@@ -73,7 +94,7 @@ class Filter {
 	 * @param {any} json The constructing JSON
 	 */
 	public static fromJSON(json) {
-		return new Filter(eval('(' + json.fn + ')'), json.disabled);
+		return new Filter(eval('(' + json.fn + ')'), json.value, json.disabled);
 	}
 }
 

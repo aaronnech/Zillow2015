@@ -49,11 +49,11 @@ var LocationFilterComponent = React.createClass({
     },
 
     /**
-     * Get if this filter is disabled or not
-     * @return {boolean} True if disabled, false otherwise
+     * Get if this filter is enabled or not
+     * @return {boolean} True if enabled, false otherwise
      */
-    getDisabled : function() {
-        return this.state.disabled;
+    getEnabled : function() {
+        return !this.state.disabled;
     },
 
     /**

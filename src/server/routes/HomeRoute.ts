@@ -2,6 +2,8 @@ import Route = require('./Route')
 import Home = require('../../common/model/Home');
 import HomeBuilder = require('../../common/model/HomeBuilder');
 import Filter = require('../../common/model/Filter');
+import Profile = require('../../common/model/Profile');
+import ProfileRecommender = require('../util/ProfileRecommender');
 
 /**
  * Defines the routes for interacting with Home models
@@ -9,6 +11,8 @@ import Filter = require('../../common/model/Filter');
 class HomeRoute implements Route {
 	private static NEXT_HOME_AMOUNT = 3;
 	private static HOME_ROUTE = '/api/home/';
+
+	private profileRecommender : ProfileRecommender
 
 	private nonceMap : any;
 	private db : any;
@@ -18,6 +22,7 @@ class HomeRoute implements Route {
 		this.app = app;
 		this.db = db;
 		this.nonceMap = {};
+		this.profileRecommender = new ProfileRecommender();
 	}
 
 	/**
@@ -59,14 +64,26 @@ class HomeRoute implements Route {
 			}
 
 			var skip : number = this.nonceMap[req.query.nonce];
+
+			// Profile reconstruction on server side
+			var profile : Profile = null;
+			if (req.query.profile) {
+				profile = Profile.fromJSON(req.query.profile);
+			}
+
+
 			this.db.count((err, amount) => {
 				skip %= (amount - HomeRoute.NEXT_HOME_AMOUNT);
 				this.db.find().skip(skip).limit(HomeRoute.NEXT_HOME_AMOUNT).toArray((err, homes) => {
 					if (!err) {
+						// Update this client's card location
 						this.nonceMap[req.query.nonce] += HomeRoute.NEXT_HOME_AMOUNT;
 						this.nonceMap[req.query.nonce] %= (amount - HomeRoute.NEXT_HOME_AMOUNT);
-						console.log(this.nonceMap[req.query.nonce]);
-						res.json({'homes' : homes});
+
+						res.json({
+							'homes' : homes,
+							'notification' : this.profileRecommender.generate(profile)
+						});
 					} else {
 						res.json({'error' : 'server error'});
 					}

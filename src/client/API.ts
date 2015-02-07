@@ -24,7 +24,9 @@ class API {
 	private profile : Profile;
 	private filters : any;
 
-	private butters : string[];
+	private butterQueue : string[];
+
+	private notifyFunctions : Function[];
 
 	/**
 	 * Constructs the API service
@@ -35,16 +37,11 @@ class API {
 		this.baseUrl = baseUrl;
 		this.timeoutCallback = timeoutCallback;
 		this.secret = this.constructSecret();
-		this.butters = [];
+		this.notifyFunctions = [];
+		this.butterQueue = [];
 		this.profile = undefined;
 
-		var filters = JSON.parse(window.localStorage.getItem('filters'));
-		if (filters) {
-			this.filters = filters;
-		} else {
-			this.filters = {};
-			window.localStorage.setItem('filters', JSON.stringify(this.filters));
-		}
+		this.loadFilterStore();
 
 		var nonce = window.localStorage.getItem('nonce');
 		if (nonce) {
@@ -93,15 +90,59 @@ class API {
 	}
 
 	/**
+	 * Returns whether a filter is enabled or not
+	 * @param {string} name The name of the filter
+	 * @return {boolean} true if the filter is enabled, false otherwise.
+	 *                        If the filter is not set, returns true.
+	 */
+	public isFilterEnabled(name : string) {
+		if (!this.filters[name]) {
+			return true;
+		}
+		return !this.filters[name].isDisabled();
+	}
+
+	/**
+	 * Helper to load filters into the API from localstorage
+	 */
+	private loadFilterStore() {
+		this.filters = {};
+		var json = window.localStorage.getItem('filters');
+		if (!json) {
+			return;
+		} else {
+			json = JSON.parse(json);
+			for (var id in json) {
+				if (this.filters.hasOwnProperty(id)) {
+					this.filters[id] = Filter.fromJSON(json[id]);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Helper to update local filters and save it into local storage
+	 */
+	private updateFilterStore() {
+		var json = {};
+		for (var id in this.filters) {
+			if (this.filters.hasOwnProperty(id)) {
+				json[id] = this.filters[id].toJSON();
+			}
+		}
+		window.localStorage.setItem('filters', JSON.stringify(this.filters));
+	}
+
+	/**
 	 * Disables the given filter by name
 	 * @param {string} name The filter name
-	 * @param {string} filter The user filter
+	 * @param {Filter} filter The user filter
 	 */
-	public disableFilter(name : string) {
-		if (this.filters[name]) {
-			this.filters[name].disableFilter();
-		}
-		window.localStorage.setItem('filters', this.filters);
+	public disableFilter(name : string, filter : Filter) {
+		this.filters[name] = filter;
+		this.filters[name].disableFilter();
+
+		this.updateFilterStore();
 	}
 
 	/**
@@ -110,16 +151,16 @@ class API {
 	 * @param {Filter} filter The user filter
 	 */
 	public enableFilter(name : string, filter : Filter) {
-		if (this.filters[name]) {
-			this.filters[name].disableFilter();
-		}
-		window.localStorage.setItem('filters', this.filters);
+		this.filters[name] = filter;
+		this.filters[name].enableFilter();
+
+		this.updateFilterStore();
 	}
 
 	/**
 	 * Finds out if this is the first time a user has used the app.
 	 * @return {boolean} true if this is the first time a user has launched
-	 * the application, false otherwise.
+	 *                      the application, false otherwise.
 	 */
 	public isFirstLaunch() : boolean {
 		return this.firstLaunch;
@@ -130,12 +171,32 @@ class API {
 	 * @return {string} Message
 	 */
 	public getNextButterBar() {
-		if (this.butters.length > 0) {
-			var message : string = this.butters.shift();
+		if (this.butterQueue.length > 0) {
+			var message : string = this.butterQueue.shift();
 			return message;
 		}
 
 		return "";
+	}
+
+	/**
+	 * Registers a callback to notify when a response from the server
+	 * has been recieved.
+	 * @param {Function} f The response function
+	 */
+	public notifyMe(f : Function) {
+		this.notifyFunctions.push(f);
+	}
+
+	/**
+	 * Processes the meta data that piggybacks off other
+	 * requests
+	 * @param {any} res Response json object
+	 */
+	private processMeta(res) {
+		if (res.notification) {
+			this.butterQueue.push(res.notification);
+		}
 	}
 
 	/**
@@ -153,7 +214,7 @@ class API {
 	}
 
 	/**
-	 * Gets the next set of homes
+	 * Gets the next set of homes, along with other piggy-back meta data
 	 * @param {Filter[]} filters to apply to the candidate homes
 	 * @param {Function} callback callback to return the result to.
 	 */
@@ -169,9 +230,15 @@ class API {
 				 profile : profile},
 				(data) => {
 					if (!data.error) {
+						this.processMeta(data);
 						callback(data.homes.map((json) => {
 							return new Home(HomeBuilder.fromJSON(json));
 						}));
+
+
+						for (var i = 0; i < this.notifyFunctions.length; i++) {
+							this.notifyFunctions[i]();
+						}
 					} else {
 						callback(undefined);
 					}
