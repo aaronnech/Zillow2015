@@ -95,7 +95,7 @@ var LocationFilterComponent = React.createClass({
 	 */
     render : function() {
         return (
-	        <div className={"location-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
+	        <div className={"filter location-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
                 <fieldset>
                     <legend>Location</legend>
                     <div className="left">

@@ -17,6 +17,13 @@ var ProfileFormComponent = React.createClass({
     },
 
     /**
+     * Updates the profile in localstorage
+     */
+    updateLocalProfile : function() {
+
+    },
+
+    /**
      * Called when age is changed
      */
     onAgeChange : function(ev) {
@@ -48,8 +55,8 @@ var ProfileFormComponent = React.createClass({
         	<div className="profile-form">
 				<fieldset>
 					<legend>The Basics</legend>
-					<p><input type="number" className="salary" min="0" name="salary" onChange={this.onSalaryChange} placeholder="Salary (USD)" /></p>
-					<p><input type="number" className="age" min="12" max="138" name="age" onChange={this.onAgeChange} placeholder="Age (yrs)" /></p>
+					<div><input type="number" className="salary" min="0" name="salary" onChange={this.onSalaryChange} placeholder="Salary (USD)" /></div>
+					<div><input type="number" className="age" min="12" max="138" name="age" onChange={this.onAgeChange} placeholder="Age (yrs)" /></div>
 				</fieldset>
 				<fieldset>
 					<legend>HomeQuiz</legend>
