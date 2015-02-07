@@ -19,7 +19,7 @@ class Filter {
 
 		this.value = value
 		this.allowed = allowed;
-		this.disabled = disabled || false;
+		this.disabled = disabled;
 	}
 
 	/**
@@ -31,12 +31,21 @@ class Filter {
 	public apply(collection) : any[] {
 		var result : any[] = [];
 		for (var i = 0; i < collection.length; i++) {
-			if (this.allowed(collection[i]) || this.disabled) {
+			if (this.isAllowed(collection[i])) {
 				result.push(collection[i]);
 			}
 		}
 
 		return result;
+	}
+
+	/**
+	 * Applies this filter to the given element, returning true if it passed.
+	 * @param  {any} element The element to filter
+	 * @return {boolean} True if it passes, false otherwise.
+	 */
+	public isAllowed(element) : boolean {
+		return this.disabled || this.allowed(element, this.value);
 	}
 
 	/**
@@ -59,7 +68,7 @@ class Filter {
 	 * Gets the disabled status of the filter
 	 * @return {boolean} true if it is disabled, false otherwise
 	 */
-	public isDisable() {
+	public isDisabled() {
 		return this.disabled;
 	}
 
@@ -94,6 +103,9 @@ class Filter {
 	 * @param {any} json The constructing JSON
 	 */
 	public static fromJSON(json) {
+		if (typeof json.disabled == 'string') {
+			json.disabled = json.disabled == 'true';
+		}
 		return new Filter(eval('(' + json.fn + ')'), json.value, json.disabled);
 	}
 }

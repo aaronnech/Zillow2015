@@ -13,7 +13,6 @@ var FilterFormComponent = React.createClass({
 	 * @param  {any} filterComponent The modified filter component
 	 */
     onFilterChange : function(filterComponent) {
-    	console.log('Filter changed!');
     	var disabled = filterComponent.getEnabled();
     	var name = filterComponent.getName();
     	var filter = filterComponent.getFilter();

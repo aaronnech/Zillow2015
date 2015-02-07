@@ -20,7 +20,7 @@ var ProfileFormComponent = React.createClass({
      * Updates the profile in localstorage
      */
     updateLocalProfile : function() {
-
+    	
     },
 
     /**

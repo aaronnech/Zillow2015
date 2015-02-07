@@ -30,11 +30,13 @@ class AccessibleKingCountyPipeline implements Pipeline {
 		
 		for (var i : number = 0; i < this.data.data.length; i++) {
 			var row : any = this.data.data[i];
+
+			// Access indicies
 			var lon = row.length - 3;
 			var lat = row.length - 4;
 			var taken = 10;
 			var desc = 9;
-			console.log(row[taken]);
+
 			if (row[taken] != 'Rented') {
 				result.push({
 						'lat' : Number(row[lat]),

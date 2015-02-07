@@ -113,7 +113,7 @@ class API {
 		} else {
 			json = JSON.parse(json);
 			for (var id in json) {
-				if (this.filters.hasOwnProperty(id)) {
+				if (json.hasOwnProperty(id)) {
 					this.filters[id] = Filter.fromJSON(json[id]);
 				}
 			}
@@ -221,7 +221,6 @@ class API {
 	public getNextHomes(callback : Function) {
 		var filters = this.getFilterJSON();
 		var profile = this.profile.toJSON();
-		console.log(profile);
 
 		JQuery.get(this.baseUrl + '/home/',
 				{key : this.secret,

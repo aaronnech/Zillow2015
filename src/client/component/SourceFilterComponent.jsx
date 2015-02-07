@@ -25,7 +25,7 @@ var SourceFilterComponent = React.createClass({
      */
     getInitialState : function() {
         return {
-            disabled : !this.props.API.isFilterEnabled(this.getName())
+            disabled : this.props.API.isFilterEnabled(this.getName())
         };
     },
 
@@ -67,7 +67,7 @@ var SourceFilterComponent = React.createClass({
 	 */
     render : function() {
         return (
-	        <div className={"filter location-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
+	        <div className={"filter source-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
                 <fieldset>
                     <legend>Data Source - {this.props.displayName}</legend>
                     <div className="left">

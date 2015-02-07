@@ -44,7 +44,7 @@ var CardDeckComponent = React.createClass({
 			this.props.onSaveCard(activeCard);
 		}
 		this.state.cards.splice(0,1);
-		if(this.state.cards.length < 3) {
+		if(this.state.cards.length < 6) {
 			this.addMoreCardsToDeck();
 		}
 		this.setState({ cards: this.state.cards});

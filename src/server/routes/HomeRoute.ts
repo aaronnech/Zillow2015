@@ -9,7 +9,7 @@ import ProfileRecommender = require('../util/ProfileRecommender');
  * Defines the routes for interacting with Home models
  */
 class HomeRoute implements Route {
-	private static NEXT_HOME_AMOUNT = 3;
+	private static NEXT_HOME_AMOUNT = 10;
 	private static HOME_ROUTE = '/api/home/';
 
 	private profileRecommender : ProfileRecommender
@@ -71,24 +71,52 @@ class HomeRoute implements Route {
 				profile = Profile.fromJSON(req.query.profile);
 			}
 
+			// Filter reconstruction on server side
+			var filters : Filter[] = [];
+			if (req.query.filters && req.query.filters.length) {
+				for (var i = 0; i < req.query.filters.length; i++) {
+					filters.push(
+						Filter.fromJSON(req.query.filters[i])
+					);
+				}
+			}
+			console.log("filters constructed: ");
+			console.log(filters);
 
-			this.db.count((err, amount) => {
-				skip %= (amount - HomeRoute.NEXT_HOME_AMOUNT);
-				this.db.find().skip(skip).limit(HomeRoute.NEXT_HOME_AMOUNT).toArray((err, homes) => {
+			this.db.find().toArray((err, homes) => {
 					if (!err) {
+						// Apply filters to homes
+						// TODO: make faster?
+						var filteredHomes = homes.filter((home) => {
+							var result : boolean = true;
+							
+							// Apply all filters
+							for (var i = 0; i < filters.length; i++) {
+								result = result && filters[i].isAllowed(home);
+							}
+
+							return result;
+						});
+
+						// Get a selection of HomeRoute.NEXT_HOME_AMOUNT of homes
+						skip %= (filteredHomes.length - HomeRoute.NEXT_HOME_AMOUNT);
+						var finalSelection = filteredHomes.slice(skip, skip + HomeRoute.NEXT_HOME_AMOUNT);
+
 						// Update this client's card location
 						this.nonceMap[req.query.nonce] += HomeRoute.NEXT_HOME_AMOUNT;
-						this.nonceMap[req.query.nonce] %= (amount - HomeRoute.NEXT_HOME_AMOUNT);
+						this.nonceMap[req.query.nonce] %= (filteredHomes.length - HomeRoute.NEXT_HOME_AMOUNT);
+
+						console.log('total homes returned after filter: ' + filteredHomes.length);
+						console.log('selected filteredHomes returned: ' + finalSelection.length);
 
 						res.json({
-							'homes' : homes,
+							'homes' : finalSelection,
 							'notification' : this.profileRecommender.generate(profile)
 						});
 					} else {
 						res.json({'error' : 'server error'});
 					}
-			    });
-			});	
+		    });
 		}
 
 	}
