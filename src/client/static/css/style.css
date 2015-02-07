@@ -244,6 +244,32 @@ input {
 	margin-top: 10px;
 }
 
+.houseA {
+ 	width: 50%;
+	min-height: 100px;
+	float: left;
+	border: 1px;
+	opacity: 0.5;
+}
+
+.houseB {
+ 	width: 50%;
+    float: left;
+    min-height: 100px;
+    border: 1px;
+    opacity: 0.5;
+}
+
+.ratingBar {
+	min-height: 10px;
+}
+
+.ratingName {
+	margin-top: 10px;
+}
+
+
+
 @keyframes blink {  
     0% { background: #ade0e7; }
     100% { background: #71c9d6; }
