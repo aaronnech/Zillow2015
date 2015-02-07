@@ -70,7 +70,9 @@ var QuizComponent = React.createClass({
         	<div className="quiz-component">
                 <div className="houseA" onClick = {this.onChooseA}>
                 Option_A
-                    
+                    <div>
+                       <img src = "https://s3.amazonaws.com/zillowhacknechboom/house_picture.png" /> 
+                       </div>
                     <div className="ratingname"> lack of crime </div>
                     <div className="ratingBar"
                         style={{
