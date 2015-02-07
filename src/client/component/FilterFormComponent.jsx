@@ -32,6 +32,7 @@ var FilterFormComponent = React.createClass({
         return (
 	        <div className="filter-form">
                 <SourceFilterComponent API={this.props.API} onChangeFilter={this.onFilterChange} displayName="Craigslist" filterId="craigslist" source="craigslist" />
+                <SourceFilterComponent API={this.props.API} onChangeFilter={this.onFilterChange} displayName="King County Accessible Housing" filterId="kcaccess" source="kkaccessible" />
 	        </div>
         );
 	}

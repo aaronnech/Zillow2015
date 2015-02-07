@@ -18,7 +18,7 @@ class AccessibleKingCountyPipeline implements Pipeline {
 	 * @return {string} The name of the pipeline
 	 */
 	public getName() : string {
-		return "Accessible King County Pipeline";
+		return "kkaccessible";
 	}
 
 	/**
