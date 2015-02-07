@@ -44,17 +44,49 @@ var LocationFilterComponent = React.createClass({
             lat : "",
             lon : "",
             miles : 0,
-            disabled : true,
+            disabled : true
         };
     },
 
+    /**
+     * Get if this filter is disabled or not
+     * @return {boolean} True if disabled, false otherwise
+     */
+    getDisabled : function() {
+        return this.state.disabled;
+    },
+
+    /**
+     * Gets the name of this filter
+     * @return {string} the name
+     */
+    getName : function() {
+        return "location";
+    },
+
+    /**
+     * Gets the filter for this filter component
+     * @return {Filter} the filter
+     */
+    getFilter : function() {
+        return new Filter();
+    },
+
+    /**
+     * Called when the checkbox changes state
+     */
     onCheckBoxChange : function() {
         this.setState({disabled: !this.state.disabled});
     },
 
+    /**
+     * Called when distance is changed
+     */
     onDistanceChange : function(ev) {
         if (event.target.validity.valid) {
-            this.setState({miles : event.target.value});
+            if (event.target.value > 0) {
+                this.setState({miles : event.target.value});
+            }
         }
     },
 
@@ -64,19 +96,22 @@ var LocationFilterComponent = React.createClass({
     render : function() {
         return (
 	        <div className={"location-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
-                <div className="left">
-                    <input type="checkbox" name="enabled" checked={!this.state.disabled}>
-                    </input>
-                    <label htmlFor="enabled" onClick={this.onCheckBoxChange}>
-                        <span className="ui"></span>
-                    </label>
-                </div>
-                <div className="right">
-                    <p>Within</p>
-                    <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
-                    <p>Miles of Me</p>
-                </div>
-                <div style={{clear: 'both'}}></div>
+                <fieldset>
+                    <legend>Location</legend>
+                    <div className="left">
+                        <input type="checkbox" name="enabled" onChange={function(){}} checked={!this.state.disabled}>
+                        </input>
+                        <label htmlFor="enabled" onClick={this.onCheckBoxChange}>
+                            <span className="ui"></span>
+                        </label>
+                    </div>
+                    <div className="right">
+                        <p>Within</p>
+                        <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
+                        <p>miles of me</p>
+                    </div>
+                    <div style={{clear: 'both'}}></div>
+                </fieldset>
 	        </div>
         );
 	}

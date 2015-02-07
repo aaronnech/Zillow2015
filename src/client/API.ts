@@ -1,7 +1,10 @@
 /// <reference path="../common/def/node-uuid.d.ts"/>
 import JQuery = require('jquery');
 import uuid = require('node-uuid');
+
 import Constants = require('./Constants');
+
+import Profile = require('../common/model/Profile');
 import Filter = require('../common/model/Filter');
 import Home = require('../common/model/Home');
 import HomeBuilder = require('../common/model/HomeBuilder');
@@ -17,6 +20,9 @@ class API {
 	private secret : string;
 	private nonce : string;
 
+	private profile : Profile;
+	private filters : any;
+
 	/**
 	 * Constructs the API service
 	 * @param {string}   baseUrl         base URL of the API
@@ -26,6 +32,16 @@ class API {
 		this.baseUrl = baseUrl;
 		this.timeoutCallback = timeoutCallback;
 		this.secret = this.constructSecret();
+		this.profile = undefined;
+
+		var filters = JSON.parse(window.localStorage.getItem('filters'));
+		if (filters) {
+			this.filters = filters;
+		} else {
+			this.filters = {};
+			window.localStorage.setItem('filters', JSON.stringify(this.filters));
+		}
+
 		var nonce = window.localStorage.getItem('nonce');
 		if (nonce) {
 			this.nonce = nonce;
@@ -62,6 +78,48 @@ class API {
 		return secret;
 	}
 
+	/**
+	 * Sets the profile of this API
+	 * @param {Profile} profile The user profile
+	 */
+	public setProfile(profile : Profile) {
+		this.profile = profile;
+	}
+
+	/**
+	 * Disables the given filter by name
+	 * @param {string} name The filter name
+	 * @param {string} filter The user filter
+	 */
+	public disableFilter(name : string) {
+		if (this.filters[name]) {
+			this.filters[name].disableFilter();
+		}
+		window.localStorage.setItem('filters', this.filters);
+	}
+
+	/**
+	 * Enables (or updates) the given filter by name
+	 * @param {string} name The filter name
+	 * @param {Filter} filter The user filter
+	 */
+	public enableFilter(name : string, filter : Filter) {
+		if (this.filters[name]) {
+			this.filters[name].disableFilter();
+		}
+		window.localStorage.setItem('filters', this.filters);
+	}
+
+	private getFilterJSON() {
+		var result = [];
+		for (var prop in this.filters) {
+			if (this.filters.hasOwnProperty(prop) && this.filters[prop]) {
+		    	result.push(this.filters[prop].toJSON());
+			}
+		}
+
+		return result;
+	}
 
 	/**
 	 * Gets the next set of homes
@@ -69,15 +127,21 @@ class API {
 	 * @param {Function} callback callback to return the result to.
 	 */
 	public getNextHomes(callback : Function) {
-		JQuery.get(this.baseUrl + '/home/', {key : this.secret, nonce : this.nonce, filters : []}, (data) => {
-			if (!data.error) {
-				callback(data.homes.map((json) => {
-					return new Home(HomeBuilder.fromJSON(json));
-				}));
-			} else {
-				callback(undefined);
-			}
-		});
+		var filters = this.getFilterJSON();
+		var profile = this.profile.toJSON();
+
+		JQuery.get(this.baseUrl + '/home/',
+				{key : this.secret, nonce : this.nonce, filters : filters, profile : profile},
+				(data) => {
+					if (!data.error) {
+						callback(data.homes.map((json) => {
+							return new Home(HomeBuilder.fromJSON(json));
+						}));
+					} else {
+						callback(undefined);
+					}
+				}
+		);
 	}
 }
 

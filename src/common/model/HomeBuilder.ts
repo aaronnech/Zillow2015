@@ -9,6 +9,7 @@ class HomeBuilder {
 	private link : string;
 	private lat : number;
 	private lon : number;
+	private accessibility : any;
 
 	// Constructor
 	constructor() {}

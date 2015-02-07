@@ -36,6 +36,14 @@ class Filter {
 	}
 
 	/**
+	 * Set the processing function of this filter
+	 * @param {Function} allowed The filter function
+	 */
+	public setAllowed(allowed : Function) {
+		this.allowed = allowed;
+	}
+
+	/**
 	 * Disables the filter, meaning the filter will let all elements pass.
 	 */
 	public disableFilter() {

@@ -7,8 +7,17 @@ var LocationFilterComponent = require('./LocationFilterComponent.jsx');
  */
 var FilterFormComponent = React.createClass({
 
-    onFilterEnable : function(filter, name) {
+    onFilterChange : function(filterComponent) {
+    	var currentFilters 
+    	var disabled = filterComponent.getEnabled();
+    	var name = filterComponent.getName();
+    	var filter = filterComponent.getFilter();
 
+    	if (disabled) {
+    		this.props.API.disableFilter(name);
+    	} else {
+    		this.props.API.enableFilter(name, filter);
+    	}
     },
 
 	/**

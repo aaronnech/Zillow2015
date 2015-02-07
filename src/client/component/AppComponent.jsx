@@ -1,11 +1,15 @@
 var React = require('react');
 var Constants = require('../Constants');
 var API = require('../API');
+
+var Profile = require('../../common/model/Profile');
+
 var CardDeckComponent = require('./CardDeckComponent.jsx');
 var HeaderComponent = require('./HeaderComponent.jsx');
 var FooterNavigationComponent = require('./FooterNavigationComponent.jsx');
 var SavedListComponent = require('./SavedListComponent.jsx');
 var FilterFormComponent = require('./FilterFormComponent.jsx');
+var ProfileFormComponent = require('./ProfileFormComponent.jsx');
 
 /**
  * Encapsulates the entire application
@@ -22,13 +26,31 @@ var AppComponent = React.createClass({
 	},
 
     /**
+     * Get the user profile from local storage or begin a new one
+     */
+    getProfile : function() {
+        var profileJson = JSON.parse(window.localStorage.getItem('profile'));
+        if (profileJson) {
+            return Profile.fromJSON(profileJson);
+        }
+
+        return new Profile();
+    },
+
+    /**
      * Initalize the application, setting it to the home screen
      */
     getInitialState : function() {
+        var profile = this.getProfile();
+
+        var api = new API(this.props.API, this.onRequestTimeout);
+        api.setProfile(profile);
+
         return {
             active : Constants.SCREENS.HOME,
             savedHomes : [],
-            API : new API(this.props.API, this.onRequestTimeout)
+            profile : profile,
+            API : api
         };
     },
 
@@ -64,12 +86,12 @@ var AppComponent = React.createClass({
                 onClick : this.setScreenLater(Constants.SCREENS.LIST)
             },
             {
-                icon : 'img/icon.settings.png',
-                onClick : this.setScreenLater(Constants.SCREENS.SETTINGS)
-            },
-            {
                 icon : 'img/icon.profile.png',
                 onClick : this.setScreenLater(Constants.SCREENS.PROFILE)
+            },
+            {
+                icon : 'img/icon.settings.png',
+                onClick : this.setScreenLater(Constants.SCREENS.SETTINGS)
             }
         ];
 
@@ -89,7 +111,7 @@ var AppComponent = React.createClass({
 
                 </div>
                 <div className={"screen " + (isProfile ? "active" : "")}>
-
+                    <ProfileFormComponent data={this.state.profile} />
                 </div>
                 <FooterNavigationComponent screen={this.state.active} buttons={navButtons} />
             </div>

@@ -7,10 +7,28 @@
 class Profile {
 	private salary : number;
 	private age : number;
+	private quizResponses : any;
 
 	constructor() {
 		this.salary = undefined;
 		this.age = undefined;
+		this.quizResponses = [];
+	}
+
+	/**
+	 * Pushes a quiz response onto the stack
+	 * @param {any} v The quiz response
+	 */
+	public pushQuizResponse(v : any) {
+		this.quizResponses.push(v);
+	}
+
+	/**
+	 * Gets the quiz responses
+	 * @return {any[]} The quiz responses
+	 */
+	public getQuizResponses() {
+		return this.quizResponses;
 	}
 
 	/**
@@ -52,7 +70,8 @@ class Profile {
 	public toJSON() {
 		return {
 			'age' : this.age,
-			'salary' : this.salary
+			'salary' : this.salary,
+			'quizResponses' : this.quizResponses
 		};
 	}
 
@@ -61,11 +80,17 @@ class Profile {
 	 * @param {any} json The JSON form of the person
 	 * @return {Profile} The model profile
 	 */
-	public static fromJSON(json) :  {
+	public static fromJSON(json) : Profile {
 		var profile : Profile = new Profile();
+
 		profile.setAge(json.age);
 		profile.setSalary(json.salary);
-		
+		for (var i = 0; i < json.quizResponses.length; i++) {
+			profile.pushQuizResponse(json.quizResponses[i]);
+		}
+
 		return profile;
 	}
 }
+
+export = Profile;

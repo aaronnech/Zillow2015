@@ -218,6 +218,10 @@ li.saved-home:nth-child(odd) {background: #aaa}
 	float: right;
 }
 
+fieldset {
+	padding: 20px;
+}
+
 /**
  * Style revamp for checkboxes
  */
