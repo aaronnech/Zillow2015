@@ -1,5 +1,6 @@
 import Pipeline = require('./pipeline/Pipeline');
 import CraigslistPipeline = require('./pipeline/CraigslistPipeline');
+import AccessibleKingCountyPipeline = require('./pipeline/AccessibleKingCountyPipeline');
 
 /**
  * Main utility to harvest data from various data pipelines
@@ -14,7 +15,8 @@ class Harvester {
 	constructor(db : any) {
 		// TODO: Take database connection as parameter
 		this.pipelines = [
-			new CraigslistPipeline()
+			new CraigslistPipeline(),
+			new AccessibleKingCountyPipeline()
 		];
 		this.db = db;
 	}
@@ -41,6 +43,9 @@ class Harvester {
 		// Mark data source
 		for (var i = 0; i < result.length; i++) {
 			result[i].source = pipeline.getName();
+		}
+		if (pipeline.getName() == 'Accessible King County Pipeline') {
+			console.log(result);
 		}
 
 		// Insert data into database

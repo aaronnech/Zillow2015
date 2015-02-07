@@ -31,7 +31,8 @@
     "jquery" : "latest",
     "crawler" : "latest",
     "mongodb" : "latest",
-    "node-uuid" : "latest"
+    "node-uuid" : "latest",
+    "fs" : "latest"
   },
   "author": "Aaron Nech",
   "license": "N/A"

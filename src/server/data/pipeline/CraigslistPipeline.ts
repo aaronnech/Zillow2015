@@ -101,7 +101,6 @@ class CraigslistPipeline implements Pipeline {
 		this.data[index].lon = $('#map').data('longitude');
 		this.data[index].lat = $('#map').data('latitude');
 
-		console.log(this.data[index]);
 		this.postsLeft--;
 		console.log('posts left: ' + this.postsLeft + ' pages left: ' + this.pagesLeft);
 		if (this.postsLeft == 0 && this.pagesLeft == 0) {

@@ -7,6 +7,8 @@ class HomeBuilder {
 	private rentPrice : number;
 	private buyPrice : number;
 	private link : string;
+	private lat : number;
+	private lon : number;
 
 	// Constructor
 	constructor() {}
@@ -17,6 +19,8 @@ class HomeBuilder {
 	 */
 	public static fromJSON(json : any) : HomeBuilder {
 		return (new HomeBuilder())
+				.setLon(json.lon || undefined)
+				.setLat(json.lat || undefined)
 				.setDescription(json.description || null)
 				.setImage(json.image || undefined)
 				.setLink(json.link || undefined)
@@ -29,8 +33,20 @@ class HomeBuilder {
 	public getRentPrice() : number { return this.rentPrice; }
 	public getBuyPrice() : number { return this.buyPrice; }
 	public getLink() : string { return this.link; }
+	public getLat() : number { return this.lat; }
+	public getLon() : number { return this.lon; }
 
 	// Setters
+	public setLat(lat : number) : HomeBuilder {
+		this.lat = lat;
+		return this;
+	}
+
+	public setLon(lon : number) : HomeBuilder {
+		this.lon = lon;
+		return this;
+	}
+
 	public setDescription(description : string) : HomeBuilder {
 		this.description = description;
 		return this;
