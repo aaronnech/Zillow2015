@@ -49,6 +49,7 @@ var AppComponent = React.createClass({
 
         return {
             active : Constants.SCREENS.HOME,
+            detailHome : null,
             savedHomes : [],
             profile : profile,
             API : api
@@ -60,6 +61,27 @@ var AppComponent = React.createClass({
      */
     onRequestTimeout : function() {
         console.log('API REQUEST TIMEOUT');
+    },
+
+    /**
+     * Called when a home is removed
+     * @param  {number} key item index
+     */
+    onRemoveHome : function(key) {
+        console.log(key);
+        var homes = this.state.savedHomes.slice(0);
+        homes.splice(key, 1);
+        this.setState({savedHomes : homes});
+    },
+
+    /**
+     * Sets the current home in the detail page, and switches to
+     * that page
+     * @param  {Home} home The saved home to detail
+     */
+    onHomeDetail : function(home) {
+        this.setState({detailHome : home});
+        this.setScreenLater(Constants.SCREENS.LIST)();
     },
 
     /**
@@ -106,13 +128,13 @@ var AppComponent = React.createClass({
                 	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>
-                    <SavedListComponent data={this.state.savedHomes} />
+                    <SavedListComponent onClickItem={this.onHomeDetail} onRemoveItem={this.onRemoveHome} data={this.state.savedHomes} />
                 </div>
                 <div className={"screen " + (isSettings ? "active" : "")}>
                     <FilterFormComponent API={this.state.API} />
                 </div>
                 <div className={"screen " + (isDetails ? "active" : "")}>
-
+                    <HomeDetailComponent data={this.state.detailHome} />
                 </div>
                 <div className={"screen " + (isProfile ? "active" : "")}>
                     <ProfileFormComponent data={this.state.profile} />

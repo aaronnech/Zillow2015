@@ -18,13 +18,19 @@ var SavedListComponent = React.createClass({
 		};
 	},
 
+	/**
+	 * Called when a item is removed
+	 * @param  {number} key item index
+	 */
+	onRemoveItem : function(key) {
+		this.props.onRemoveItem(key);
+	},
+
     /**
      * Initalize the list
      */
     getInitialState : function() {
-        return {
-            data : this.props.data
-        };
+        return {};
     },
 
 	/**
@@ -36,7 +42,7 @@ var SavedListComponent = React.createClass({
 	        	<ul className="saved">
 				{this.props.data.map(function(item, i) {
 					return (
-						<SavedHomeComponent onClick={this.onClickLater(item)} key={i} data={item} />
+						<SavedHomeComponent onRemoveHome={this.onRemoveItem} onClick={this.onClickLater(item)} key={i} data={item} />
 					);
 				}.bind(this))}
 	        	</ul>

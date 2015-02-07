@@ -149,6 +149,10 @@ body, html {
 	height: 64px;
 }
 
+.saved-home img.remove {
+	float: right;
+}
+
 ul.saved {
 	margin: 0;
 	padding: 0;
