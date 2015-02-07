@@ -10,7 +10,7 @@ var AppComponent : any = require('./component/AppComponent.jsx');
 React.render(
     React.createElement(AppComponent, 
     	{
-    		 // 'API' : 'http://tinderhouse.herokuapp.com/api'
-    		 'API' : 'http://localhost:1337/api'
+    		 'API' : 'http://tinderhouse.herokuapp.com/api'
+    		 // 'API' : 'http://localhost:1337/api'
     	}),
     document.getElementById('content'));
