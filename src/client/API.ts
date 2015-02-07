@@ -23,6 +23,8 @@ class API {
 	private profile : Profile;
 	private filters : any;
 
+	private butters : string[];
+
 	/**
 	 * Constructs the API service
 	 * @param {string}   baseUrl         base URL of the API
@@ -110,6 +112,22 @@ class API {
 		window.localStorage.setItem('filters', this.filters);
 	}
 
+	/**
+	 * Gets the next butter bar message
+	 * @return {string} Message
+	 */
+	public getNextButterBar() {
+		if (this.butters.length > 0) {
+			var message : string = this.butters.shift();
+			return message;
+		}
+
+		return "";
+	}
+
+	/**
+	 * Get the filters as a JSON object to be passed to the server
+	 */
 	private getFilterJSON() {
 		var result = [];
 		for (var prop in this.filters) {

@@ -10,6 +10,7 @@ var FooterNavigationComponent = require('./FooterNavigationComponent.jsx');
 var SavedListComponent = require('./SavedListComponent.jsx');
 var FilterFormComponent = require('./FilterFormComponent.jsx');
 var ProfileFormComponent = require('./ProfileFormComponent.jsx');
+var ButterBarComponent = require('./ButterBarComponent.jsx');
 
 /**
  * Encapsulates the entire application
@@ -99,6 +100,7 @@ var AppComponent = React.createClass({
             <div id="app">
                 <HeaderComponent screen={this.state.active} />
                 <div className={"screen " + (isHome ? "active" : "")}>
+                    <ButterBarComponent />
                 	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>

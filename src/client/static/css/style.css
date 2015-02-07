@@ -134,6 +134,7 @@ body, html {
 	width: 100%;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	position: relative;
 }
 
 .screen.active {
@@ -197,29 +198,49 @@ li.saved-home:nth-child(odd) {background: #aaa}
 	max-width: 32px;
 }
 
-.location-filter {
+.filter {
 	list-style: none;
 	width: calc(100% - 40px);
 	margin: 0;
 	padding: 20px;
 }
 
-.location-filter.disabled:nth-child(even) {background: #ccc}
-.location-filter.disabled:nth-child(odd) {background: #aaa}
-.location-filter.enabled {
-	background: #E8FF99;
+.filter.disabled:nth-child(even) {background: #ccc}
+.filter.disabled:nth-child(odd) {background: #aaa}
+.filter.enabled {
+	background: #e0ebb5;
 }
 
-.location-filter .left {
+.filter .left {
 	float: left;
 }
 
-.location-filter .right {
+.filter .right {
 	float: right;
 }
 
 fieldset {
 	padding: 20px;
+}
+
+input {
+	padding: 5px;
+	min-width: 190px;
+}
+
+.butter-bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: calc(100% - 40px);
+	padding: 20px;
+	background: #ade0e7;
+	text-align: center;
+}
+
+.butter-bar img {
+	float: right;
+	margin-top: 10px;
 }
 
 /**
@@ -262,10 +283,10 @@ fieldset {
 
 /* on checked */
 [type="checkbox"]:checked + label:before {
-  background:#34495E; 
+  background:#333; 
 }
 [type="checkbox"]:checked + label:after {
-  background: #39D2B4;
+  background: #e0ebb5;
   top: 2px; left: 40px;
 }
 
@@ -287,7 +308,7 @@ fieldset {
 }
 [type="checkbox"]:checked + label .ui:after {
   content: "yes";
-  color: #39D2B4;
+  color: #e0ebb5;
 }
 [type="checkbox"]:focus + label:before {
   border: 1px dashed #777;
