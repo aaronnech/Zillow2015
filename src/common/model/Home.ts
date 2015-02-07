@@ -18,6 +18,7 @@ class Home {
 	public getLink() : string { return this.builder.getLink(); }
 	public getLat() : number { return this.builder.getLat(); }
 	public getLon() : number { return this.builder.getLon(); }
+	public getAccessibility() : any { return this.builder.getAccessibility(); }
 
 	public toJSON() : any {
 		return {
@@ -27,7 +28,8 @@ class Home {
 			'buyPrice' : this.builder.getBuyPrice(),
 			'link' : this.builder.getLink(),
 			'lon' : this.builder.getLon(),
-			'lat' : this.builder.getLat()
+			'lat' : this.builder.getLat(),
+			'accessibility' : this.builder.getAccessibility()
 		};
 	}
 }

@@ -24,7 +24,8 @@ class HomeBuilder {
 				.setDescription(json.description || null)
 				.setImage(json.image || undefined)
 				.setLink(json.link || undefined)
-				.setRentPrice(parseInt(json.rentPrice) || undefined);
+				.setRentPrice(json.rentPrice || undefined)
+				.setAccessibility(json.accessibility || undefined);
 	}
 
 	// Getters
@@ -35,8 +36,14 @@ class HomeBuilder {
 	public getLink() : string { return this.link; }
 	public getLat() : number { return this.lat; }
 	public getLon() : number { return this.lon; }
+	public getAccessibility() : any { return this.accessibility; }
 
 	// Setters
+	public setAccessibility(accessibility : any) : HomeBuilder {
+		this.accessibility = accessibility;
+		return this;
+	}
+
 	public setLat(lat : number) : HomeBuilder {
 		this.lat = lat;
 		return this;
