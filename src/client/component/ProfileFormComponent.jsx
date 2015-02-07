@@ -1,6 +1,8 @@
 var React = require('react');
 var Constants = require('../Constants');
 
+var QuizComponent = require('./QuizComponent.jsx');
+
 /**
  * Encapsulates the profile form
  */
@@ -53,6 +55,7 @@ var ProfileFormComponent = React.createClass({
 					<legend>HomeQuiz</legend>
 					<p style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>Take a quick housing quiz</p>
 					<p style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>Tap which one you prefer</p>
+                    <QuizComponent style={{'margin': 'auto'}} foo="bar" profile={profile} />
 				</fieldset>
         	</div>
         );
