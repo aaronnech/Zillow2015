@@ -27,6 +27,26 @@ var ButterBarComponent = React.createClass({
     },
 
     /**
+     * Called when the server has a response
+     */
+    notifyResponse : function() {
+        if (!this.state.show) {
+            var next = this.props.API.getNextButterBar();
+            if (next && next != "") {
+                this.setState({message : next, show : true});
+                this.blink();
+            }
+        }
+    },
+
+    /**
+     * Called after component mounts
+     */
+    componentDidMount : function() {
+        this.props.API.notifyMe(this.notifyResponse);
+    },
+
+    /**
      * Dismisses the butter bar
      */
     dismiss : function() {

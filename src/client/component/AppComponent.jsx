@@ -107,7 +107,7 @@ var AppComponent = React.createClass({
                     <SavedListComponent data={this.state.savedHomes} />
                 </div>
                 <div className={"screen " + (isSettings ? "active" : "")}>
-                    <FilterFormComponent />
+                    <FilterFormComponent API={this.state.API} />
                 </div>
                 <div className={"screen " + (isDetails ? "active" : "")}>
 

@@ -2,38 +2,22 @@ var React = require('react');
 var Filter = require('../../common/model/Filter');
 
 /**
- * Encapsulates the LocationFilterComponent of the application
+ * Encapsulates the SourceFilterComponent of the application
  */
-var LocationFilterComponent = React.createClass({
-    /**
-     * Get the current location
-     */
-    getLocation : function() {
-        navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError);
-    },
+var SourceFilterComponent = React.createClass({
 
     /**
      * Initialize
      */
     componentDidMount : function() {
-        this.getLocation();
+        
     },
 
     /**
-     * Located successfully
+     * Called when the component updates
      */
-    onLocateSuccess : function(position) {
-        this.setState({
-            lat : position.coords.latitude,
-            lon : position.coords.longitude
-        });
-    },
-
-    /**
-     * Location error
-     */
-    onLocateError : function() {
-        console.log('Error getting location');
+    componentDidUpdate: function() {
+        this.props.onChangeFilter(this);
     },
 
     /**
@@ -41,10 +25,7 @@ var LocationFilterComponent = React.createClass({
      */
     getInitialState : function() {
         return {
-            lat : "",
-            lon : "",
-            miles : 0,
-            disabled : true
+            disabled : !this.props.API.isFilterEnabled(this.getName())
         };
     },
 
@@ -61,7 +42,7 @@ var LocationFilterComponent = React.createClass({
      * @return {string} the name
      */
     getName : function() {
-        return "location";
+        return "source-" + this.props.filterId;
     },
 
     /**
@@ -69,25 +50,16 @@ var LocationFilterComponent = React.createClass({
      * @return {Filter} the filter
      */
     getFilter : function() {
-        return new Filter();
+        return new Filter(function(json, value) {
+            return json.source != value;
+        }, this.props.source, this.state.disabled);
     },
 
     /**
      * Called when the checkbox changes state
      */
     onCheckBoxChange : function() {
-        this.setState({disabled: !this.state.disabled});
-    },
-
-    /**
-     * Called when distance is changed
-     */
-    onDistanceChange : function(ev) {
-        if (ev.target.validity.valid) {
-            if (ev.target.value > 0) {
-                this.setState({miles : ev.target.value});
-            }
-        }
+        this.setState({disabled : !this.state.disabled});
     },
 
 	/**
@@ -97,7 +69,7 @@ var LocationFilterComponent = React.createClass({
         return (
 	        <div className={"filter location-filter " + (this.state.disabled ? 'disabled' : 'enabled')}>
                 <fieldset>
-                    <legend>Location</legend>
+                    <legend>Data Source - {this.props.displayName}</legend>
                     <div className="left">
                         <input type="checkbox" name="enabled" onChange={function(){}} checked={!this.state.disabled}>
                         </input>
@@ -106,9 +78,7 @@ var LocationFilterComponent = React.createClass({
                         </label>
                     </div>
                     <div className="right">
-                        <p>Within</p>
-                        <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
-                        <p>miles of me</p>
+                        <p>{this.props.displayName}</p>
                     </div>
                     <div style={{clear: 'both'}}></div>
                 </fieldset>
@@ -117,4 +87,4 @@ var LocationFilterComponent = React.createClass({
 	}
 });
 
-module.exports = LocationFilterComponent;
+module.exports = SourceFilterComponent;

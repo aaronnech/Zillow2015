@@ -4,8 +4,9 @@
 interface Pipeline {
 	/**
 	 * Initializes the pipeline
+	 * @param {any} data Optional init data
 	 */
-	initialize() : void;
+	initialize(data ?: any) : void;
 
 	/**
 	 * Gets the name of this pipeline
