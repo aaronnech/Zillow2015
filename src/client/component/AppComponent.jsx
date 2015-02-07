@@ -55,9 +55,11 @@ var AppComponent = React.createClass({
         };
     },
 
+    /**
+     * Called when the API times out
+     */
     onRequestTimeout : function() {
         console.log('API REQUEST TIMEOUT');
-        // TODO: Show message, retry
     },
 
     /**
