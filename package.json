@@ -1,0 +1,38 @@
+{
+  "name" : "Den",
+  "version": "0.0.1",
+  "description": "A cross platform housing search utility",
+  "scripts": {
+    "install_cordova" : "cordova create _cordova com.projectns.pckge Project",
+    "install_android_cordova" : "cd _cordova && cordova platform add android && cd ..",
+    "install_location" : "cd _cordova && cordova plugin add org.apache.cordova.geolocation && cd ..",
+    "cp_cordova" : "cp -R src/client/static/* _cordova/www && cp -R src/client/cordova_config/* _cordova/",
+    "run_android_cordova" : "cd _cordova && cordova build && cordova run android && cd ..",
+    "android" : "rm -Rf _cordova && npm run-script install_cordova && npm run-script install_android_cordova && npm run-script install_location && npm run-script cp_cordova && npm run-script run_android_cordova",
+
+    "compile-ts": "cd src; find . -name \"*.ts\" | xargs ../node_modules/.bin/tsc --module commonjs; cd ..",
+    "bundle-client" : "cd src/client; ../../node_modules/.bin/browserify main.js -t reactify -o static/js/main.js; cd ../..",
+
+    "harvest" : "npm run-script make && node src/server/harvest.js",
+    "make" : "npm run-script compile-ts && npm run-script bundle-client",
+    "serve" : "npm run-script make && node src/server/main.js",
+
+    "start": "npm run-script serve"
+  },
+  "dependencies": {
+    "express" : "latest",
+    "body-parser" : "latest",
+    "typescript" : "latest",
+    "browserify" : "latest",
+    "cordova" : "latest",
+    "react" : "latest",
+    "reactify" : "latest",
+    "hammerjs" : "latest",
+    "jquery" : "latest",
+    "crawler" : "latest",
+    "mongodb" : "latest",
+    "node-uuid" : "latest"
+  },
+  "author": "Aaron Nech",
+  "license": "N/A"
+}

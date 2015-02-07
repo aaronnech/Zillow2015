@@ -1,0 +1,14 @@
+/**
+ * Configurations for server mongo database.
+ */
+class DBConfig {
+	public static USERNAME = "un";
+	public static PASSWORD = "pw";
+	public static DB_NAME = "name";
+	public static URL = "mongodb://" +
+						DBConfig.USERNAME +
+						":" +
+						DBConfig.PASSWORD +
+						"@website.com:port/" +
+						DBConfig.DB_NAME;
+}

@@ -1,0 +1,292 @@
+@font-face {
+    font-family: Bebas;
+    src: url('../font/BebasNeue.otf');
+}
+
+body, html { 
+	font-family: Bebas;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: #fdfff6;
+}
+
+#content, #app {
+	position:relative;
+	width: 100%;
+	height: 100%;
+}
+
+
+#card-deck {
+	margin: 0 auto;
+	width: 300px;
+	max-width: 100%;
+	position: relative;
+	top: calc(50% - 150px);
+}
+
+.card { 
+	padding: 0;
+	margin: 0;
+	-webkit-user-select:none;
+	position: relative;
+	width: 300px;
+	height: 300px;
+	max-width: 100%;
+}
+
+.card > li img {
+	max-width: 200px;
+	max-height: 200px;
+	pointer-events: none;
+}
+
+.card > li { 
+	list-style:none;
+	background-color:white;
+	padding:0;
+	margin:0;
+	border:solid 1px #dedede;
+	position: absolute;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	padding: 10px;
+	font-size: 100px;
+	color: #333;
+	text-align: center;
+}
+
+.card > li.active {
+	position: absolute;
+	z-index: 2;
+	width: calc(100% - 20px);
+	height: calc(100% - 20px);
+	padding: 10px;
+	margin: 0;
+}
+
+.card > li > .front {
+	display: block;
+}
+
+.card > li > .back {
+	display: none;
+}
+
+.card li h2 { 
+	font-size: 15px;
+}
+
+.action { 
+	width: 80px;
+	height: 80px;
+	border-radius: 30%;
+	position: absolute;
+	top: calc(50% - 40px);
+	left: calc(50% - 40px);
+	display: none;
+	z-index: 10;
+}
+
+.keep {
+	background-color: rgba(0,255,0,0.2);
+}
+
+.discard { 
+	background-color: rgba(255,0,0,0.2);
+}
+
+.hide { 
+	display:none;
+}
+
+.show {
+	display:block;
+}
+
+#header {
+	width: 100%;
+	height: 32px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background: #333;
+	color: #ddd;
+}
+
+#header p {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+#header img {
+	margin: 0 10px 0 5px;
+}
+
+.screen {
+	display: none;
+	height: calc(100% - 63px - 42px);
+	width: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.screen.active {
+	display: block;
+}
+
+.saved-home {
+	list-style: none;
+	width: calc(100% - 40px);
+	margin: 0;
+	padding: 20px;
+	height: 64px;
+}
+
+ul.saved {
+	margin: 0;
+	padding: 0;
+}
+
+li.saved-home:nth-child(even) {background: #ccc}
+li.saved-home:nth-child(odd) {background: #aaa}
+
+.saved-home img, p {
+	display: inline-block;
+}
+
+.saved-home p {
+	height: 100%;
+	vertical-align: middle;
+}
+
+.saved-home img {
+	max-height: 64px;
+	max-width: 64px;
+	margin-right: 20px;
+}
+
+
+.nav {
+	display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 55px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: table-cell;
+    height: 45px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.nav li img {
+	max-height: 70px;
+	max-width: 32px;
+}
+
+.location-filter {
+	list-style: none;
+	width: calc(100% - 40px);
+	margin: 0;
+	padding: 20px;
+}
+
+.location-filter.disabled:nth-child(even) {background: #ccc}
+.location-filter.disabled:nth-child(odd) {background: #aaa}
+.location-filter.enabled {
+	background: #E8FF99;
+}
+
+.location-filter .left {
+	float: left;
+}
+
+.location-filter .right {
+	float: right;
+}
+
+/**
+ * Style revamp for checkboxes
+ */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 75px;
+  cursor: pointer;
+}
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before,
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+}
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  left:0; top: -3px;
+  width: 65px; height: 30px;
+  background: #DDDDDD;
+  border-radius: 15px;
+  transition: background-color .2s;
+}
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  width: 20px; height: 20px;
+  transition: all .2s;
+  border-radius: 50%;
+  background: #7F8C9A;
+  top: 2px; left: 5px;
+}
+
+/* on checked */
+[type="checkbox"]:checked + label:before {
+  background:#34495E; 
+}
+[type="checkbox"]:checked + label:after {
+  background: #39D2B4;
+  top: 2px; left: 40px;
+}
+
+[type="checkbox"]:checked + label .ui,
+[type="checkbox"]:not(:checked) + label .ui:before,
+[type="checkbox"]:checked + label .ui:after {
+  position: absolute;
+  left: 6px;
+  width: 65px;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 22px;
+  transition: all .2s;
+}
+[type="checkbox"]:not(:checked) + label .ui:before {
+  content: "no";
+  left: 32px
+}
+[type="checkbox"]:checked + label .ui:after {
+  content: "yes";
+  color: #39D2B4;
+}
+[type="checkbox"]:focus + label:before {
+  border: 1px dashed #777;
+  box-sizing: border-box;
+  margin-top: -1px;
+}
