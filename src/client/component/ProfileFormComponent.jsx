@@ -65,7 +65,7 @@ var ProfileFormComponent = React.createClass({
 					<legend>HomeQuiz</legend>
 					<p style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>Tell us about which homes you prefer <span onClick={this.setState({showQuiz : false})}>START</span></p>
 					<p style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>Tap which one you prefer</p>
-                    <div style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>
+                    <div style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>
                     	<QuizComponent style={{'margin': 'auto'}} profile={profile} updateLocalProfile={this.updateLocalProfile} />
                     </div>
 				</fieldset>
