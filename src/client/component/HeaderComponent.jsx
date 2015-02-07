@@ -19,6 +19,8 @@ var HeaderComponent = React.createClass({
         		return "Home Details";
         	case Constants.SCREENS.LIST:
         		return "Saved Homes";
+        	case Constants.SCREENS.PROFILE:
+        		return "Searcher Profile";
 		}
 		return "";
 	},

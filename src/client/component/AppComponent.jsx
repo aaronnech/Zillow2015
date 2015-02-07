@@ -51,6 +51,7 @@ var AppComponent = React.createClass({
         var isHome = (this.state.active == Constants.SCREENS.HOME);
         var isList = (this.state.active == Constants.SCREENS.LIST);
         var isSettings = (this.state.active == Constants.SCREENS.SETTINGS);
+        var isProfile = (this.state.active == Constants.SCREENS.PROFILE);
         var isDetails = (this.state.active == Constants.SCREENS.DETAILS);
 
         var navButtons = [
@@ -65,6 +66,10 @@ var AppComponent = React.createClass({
             {
                 icon : 'img/icon.settings.png',
                 onClick : this.setScreenLater(Constants.SCREENS.SETTINGS)
+            },
+            {
+                icon : 'img/icon.profile.png',
+                onClick : this.setScreenLater(Constants.SCREENS.PROFILE)
             }
         ];
 
@@ -81,6 +86,9 @@ var AppComponent = React.createClass({
                     <FilterFormComponent />
                 </div>
                 <div className={"screen " + (isDetails ? "active" : "")}>
+
+                </div>
+                <div className={"screen " + (isProfile ? "active" : "")}>
 
                 </div>
                 <FooterNavigationComponent screen={this.state.active} buttons={navButtons} />

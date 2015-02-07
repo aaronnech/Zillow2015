@@ -5,10 +5,23 @@ var Filter = require('../../common/model/Filter');
  * Encapsulates the LocationFilterComponent of the application
  */
 var LocationFilterComponent = React.createClass({
+    /**
+     * Get the current location
+     */
     getLocation : function() {
         navigator.geolocation.getCurrentPosition(this.onLocateSuccess, this.onLocateError);
     },
 
+    /**
+     * Initialize
+     */
+    componentDidMount : function() {
+        this.getLocation();
+    },
+
+    /**
+     * Located successfully
+     */
     onLocateSuccess : function(position) {
         this.setState({
             lat : position.coords.latitude,
@@ -16,10 +29,16 @@ var LocationFilterComponent = React.createClass({
         });
     },
 
+    /**
+     * Location error
+     */
     onLocateError : function() {
         console.log('Error getting location');
     },
 
+    /**
+     * Get the initial state
+     */
     getInitialState : function() {
         return {
             lat : "",
@@ -55,10 +74,7 @@ var LocationFilterComponent = React.createClass({
                 <div className="right">
                     <p>Within</p>
                     <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
-                    <p>Miles of</p>
-                    <input type="text" className="lat" name="lat" value={this.state.lat} placeholder="Latitude" disabled={this.state.disabled} />
-                    <input type="text" className="lon" name="lon" value={this.state.lon} placeholder="Longitude" disabled={this.state.disabled} />
-                    <button className="get-lat-lon" onClick={this.getLocation} disabled={this.state.disabled}>Get Location</button>
+                    <p>Miles of Me</p>
                 </div>
                 <div style={{clear: 'both'}}></div>
 	        </div>
