@@ -12,7 +12,8 @@ var CardFrontComponent = React.createClass({
     	var home = this.props.data;
 		var rentString = "Rent: $" + home.getRentPrice() + " /mo";
 		var buyString = "Buy: $" + home.getBuyPrice();
-		var priceString = home.getRentPrice() != undefined ? rentString : buyString;
+		var priceString = home.getRentPrice() != undefined ? rentString : 
+						  home.getBuyPrice() != undefined ? buyString : "";
         return (
 	        <div>
 				<img src={home.getImage() || Constants.DEFAULT_HOUSE_IMAGE} />
