@@ -5,26 +5,58 @@ var Constants = require('../Constants');
  * Encapsulates the profile form
  */
 var QuizComponent = React.createClass({
+    BAR_SIZE : 4,
     /**
      * Get the initial state
      */
     getInitialState : function() {
         return {
-            
+            "A" : {
+                "crime": this.randomRating(),
+                "education": this.randomRating(),
+                "homesize": this.randomRating(),
+                "commute": this.randomRating()
+            },
+            "B" : {
+                "crime": this.randomRating(),
+                "education": this.randomRating(),
+                "homesize": this.randomRating(),
+                "commute": this.randomRating()
+            }
         };
     },
 
     onChooseA : function() {
+        console.log("crime " + this.state.A.crime);
+        console.log("education " + this.state.A.education);
+        console.log("homesize " + this.state.A.homesize);
+        console.log("commute " + this.state.A.commute);
+        console.log("barsize " +  this.BAR_SIZE * 10 / 3);
+
 
     },
 
     onChooseB : function() {
-        this.props.profile.pushQuizResponse({
-            'commute' : 0.4,
-            'security' : 0.5,
-            'education' : 0.8,
-            'home size' : .2
-        });
+        console.log("chooseB called");
+        console.log("crime " + this.state.B.crime);
+        console.log("education " + this.state.B.education);
+        console.log("homesize " + this.state.B.homesize);
+        console.log("commute " + this.state.B.commute);
+        console.log("barsize " +  this.BAR_SIZE * 10 / 3);
+    },
+    //number from 0-30
+    randomRating : function() {
+        return Math.round(Math.random() * 10) * this.BAR_SIZE + 1;
+    },
+
+    getColor : function(value) {
+        if(value < this.BAR_SIZE * 10 / 3 )
+            return "red";
+        else if(value > this.BAR_SIZE * 20 / 3)
+            return "green";
+        else 
+            return "yellow";
+
     },
 
 	/**
@@ -36,25 +68,78 @@ var QuizComponent = React.createClass({
 
         return (
         	<div className="quiz-component">
-                <div onClick = {this.onChooseB()}
-                style={{
-                    "width": "50%",
-                    "min-height": "100px",
-                    "float": "left",
-                    "border": "1px",
-                    "background-color": "red"
-                    }}>This is a rectangle!
+                <div className="houseA" onClick = {this.onChooseA}>
+                Option_A
+                    
+                    <div className="ratingname"> lack of crime </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.A.crime + "%",
+                            "backgroundColor": this.getColor(this.state.A.crime)
+                        }}> 
+                    </div>
+
+                    <div className="ratingname"> good education </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.A.education + "%",
+                            "background-color": this.getColor(this.state.A.education) 
+                        }}> 
+
+                    </div>
+                      <div className="ratingname"> large homesize </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.A.homesize + "%",
+                            "background-color": this.getColor(this.state.A.homesize) 
+                        }}> 
+                    </div>
+
+                    <div className="ratingname"> short_commute </div>
+                      <div className="ratingBar"
+                        style={{
+                            "width" : this.state.A.commute + "%",
+                            "background-color": this.getColor(this.state.A.commute) 
+                        }}>  
+                    </div>
                 </div>
-                <div style={{
-                    "width": "50%",
-                    "float": "left",
-                    "min-height": "100px",
-                    "border": "1px",
-                    "background-color": "blue"
-                    }}>This is another rectangle!
+
+                <div className="houseB" onClick = {this.onChooseB}>
+                    Option_B
+				 <div className="ratingname"> lack of crime </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.B.crime + "%",
+                            "backgroundColor": this.getColor(this.state.B.crime)
+                        }}> 
+                    </div>
+
+                    <div className="ratingname"> good education </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.B.education + "%",
+                            "background-color": this.getColor(this.state.B.education) 
+                        }}> 
+
+                    </div>
+                      <div className="ratingname"> large homesize </div>
+                    <div className="ratingBar"
+                        style={{
+                            "width" : this.state.B.homesize + "%",
+                            "background-color": this.getColor(this.state.B.homesize) 
+                        }}> 
+                    </div>
+
+                    <div className="ratingname"> short_commute </div>
+                      <div className="ratingBar"
+                        style={{
+                            "width" : this.state.B.commute + "%",
+                            "background-color": this.getColor(this.state.B.commute) 
+                        }}>  
+                    </div>
                 </div>
-				
-        	</div>
+            </div>
+        	
         );
 	}
 });
