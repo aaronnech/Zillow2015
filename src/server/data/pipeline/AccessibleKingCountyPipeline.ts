@@ -37,6 +37,9 @@ class AccessibleKingCountyPipeline implements Pipeline {
 			var taken = 10;
 			var desc = 9;
 
+			console.log(row[lat] + ", " + row[lon]);
+			console.log(Number(row[lat]) + ", " + (row[lon]));
+
 			if (row[taken] != 'Rented') {
 				result.push({
 						'lat' : Number(row[lat]),

@@ -2,6 +2,8 @@ import Pipeline = require('./pipeline/Pipeline');
 import CraigslistPipeline = require('./pipeline/CraigslistPipeline');
 import AccessibleKingCountyPipeline = require('./pipeline/AccessibleKingCountyPipeline');
 
+import HomeSafetyMetaPipeline = require('./pipeline/HomeSafetyMetaPipeline');
+
 /**
  * Main utility to harvest data from various data pipelines
  * and store it in the database.
