@@ -2,7 +2,7 @@ var React = require('react');
 var Constants = require('../Constants');
 
 /**
- * Encapsulates the header of the application
+ * Encapsulates a saved home on a list
  */
 var SavedHomeComponent = React.createClass({
 	/**
@@ -13,7 +13,8 @@ var SavedHomeComponent = React.createClass({
 
     	var rentString = "Rent: $" + home.getRentPrice() + " /mo";
     	var buyString = "Buy: $" + home.getBuyPrice();
-    	var priceString = home.getRentPrice() != undefined ? rentString : buyString;
+		var priceString = home.getRentPrice() != undefined ? rentString : 
+						  home.getBuyPrice() != undefined ? buyString : "";
 
         return (
 	        <li className="saved-home">
