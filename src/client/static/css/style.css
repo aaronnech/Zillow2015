@@ -151,6 +151,7 @@ body, html {
 
 .saved-home img.remove {
 	float: right;
+	margin-top: 15px;
 }
 
 ul.saved {
@@ -216,6 +217,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 }
 
 .filter .left {
+	margin-top: 10px;
 	float: left;
 }
 
