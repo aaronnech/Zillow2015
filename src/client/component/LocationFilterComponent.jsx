@@ -20,12 +20,19 @@ var LocationFilterComponent = React.createClass({
     },
 
     /**
+     * Called when the component updates
+     */
+    componentDidUpdate: function() {
+        this.props.onChangeFilter(this);
+    },
+
+    /**
      * Located successfully
      */
     onLocateSuccess : function(position) {
         this.setState({
-            lat : position.coords.latitude,
-            lon : position.coords.longitude
+            lat : Number(position.coords.latitude),
+            lon : Number(position.coords.longitude)
         });
     },
 
@@ -41,10 +48,10 @@ var LocationFilterComponent = React.createClass({
      */
     getInitialState : function() {
         return {
-            lat : "",
-            lon : "",
+            lat : 0,
+            lon : 0,
             miles : 0,
-            disabled : true
+            disabled : !this.props.API.isFilterEnabled(this.getName())
         };
     },
 
@@ -53,7 +60,7 @@ var LocationFilterComponent = React.createClass({
      * @return {boolean} True if enabled, false otherwise
      */
     getEnabled : function() {
-        return !this.state.disabled;
+        return this.state.disabled;
     },
 
     /**
@@ -69,7 +76,25 @@ var LocationFilterComponent = React.createClass({
      * @return {Filter} the filter
      */
     getFilter : function() {
-        return new Filter();
+        return new Filter(function(json, value) {
+            var toRadians = function(angle) {
+              return angle * (Math.PI / 180);
+            }
+
+            // Haversine formula
+            var R = 3963.1676; // miles
+            var φ1 = toRadians(json.lon);
+            var φ2 = toRadians(value.lat);
+            var Δφ = toRadians((value.lat-json.lat));
+            var Δλ = toRadians((value.lon-json.lon));
+            var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                    Math.cos(φ1) * Math.cos(φ2) *
+                    Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            var d = R * c;
+
+            return d <= value.miles;
+        }, {lat : this.state.lat, lon : this.state.lon, miles : this.state.miles || 0}, !this.state.disabled);
     },
 
     /**
@@ -106,9 +131,7 @@ var LocationFilterComponent = React.createClass({
                         </label>
                     </div>
                     <div className="right">
-                        <p>Within</p>
                         <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
-                        <p>miles of me</p>
                     </div>
                     <div style={{clear: 'both'}}></div>
                 </fieldset>

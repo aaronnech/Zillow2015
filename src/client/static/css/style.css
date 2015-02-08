@@ -149,9 +149,24 @@ body, html {
 	height: 64px;
 }
 
+.profile-form {
+	padding: 20px;
+}
+
+button
+
 .saved-home img.remove {
 	float: right;
 	margin-top: 15px;
+}
+
+.home-detail {
+	padding: 20px;
+}
+
+.home-detail img {
+	max-width: 200px;
+	max-height: 200px;
 }
 
 ul.saved {
@@ -169,6 +184,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 .saved-home p {
 	height: 100%;
 	vertical-align: middle;
+	overflow-x: hidden;
 }
 
 .saved-home img {

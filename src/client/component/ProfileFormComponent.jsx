@@ -48,6 +48,19 @@ var ProfileFormComponent = React.createClass({
         }
     },
 
+    /**
+     * Called after component mounts
+     */
+    componentDidMount : function() {
+        if (this.props.data.getSalary()) {
+        	this.refs.salary.getDOMNode().value = this.props.data.getSalary();
+        }
+
+        if (this.props.data.getAge()) {
+        	this.refs.age.getDOMNode().value = this.props.data.getAge();
+        }
+    },
+
 	/**
 	 * Render the profile form
 	 */
@@ -58,8 +71,8 @@ var ProfileFormComponent = React.createClass({
         	<div className="profile-form">
 				<fieldset>
 					<legend>The Basics</legend>
-					<div><input type="number" className="salary" min="0" name="salary" onChange={this.onSalaryChange} placeholder="Salary (USD)" /></div>
-					<div><input type="number" className="age" min="12" max="138" name="age" onChange={this.onAgeChange} placeholder="Age (yrs)" /></div>
+					<div><input ref="salary" type="number" className="salary" min="0" name="salary" onChange={this.onSalaryChange} placeholder="Salary (USD)" /></div>
+					<div><input ref="age" type="number" className="age" min="12" max="138" name="age" onChange={this.onAgeChange} placeholder="Age (yrs)" /></div>
 				</fieldset>
 				<fieldset>
 					<legend>HomeQuiz</legend>
