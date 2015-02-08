@@ -52,7 +52,7 @@ var QuizComponent = React.createClass({
     },
 
     updateStats : function(house) {
-        for(i = 0; i < this.attributes.length; i++) {
+        for(i = 0; i < this.attributes.length; i++) { 
             rating = this.getRating(this.randomRating());
             this.HOUSE_STATS[this.attributes[i] + house] = rating;
         }
