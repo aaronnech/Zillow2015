@@ -24,8 +24,11 @@ class ProfileRecommender {
 			return "Your income may qualify you for MyPlan. <a href=\"data.gov\">Learn more</a>";
 		}
 
-		if (Math.random() > 0.5) {
-			return 'HouseFact: IP is the percentage of your salary the home costs per year';
+		if (Math.random() > 0.3) {
+			if(Math.random() > .5)
+				return 'Fun HouseFact: IP is the % of income spent on home';
+			else
+				return 'Fun HouseFact: Cost-Burdened: when more than 30% of income(IP) is spent on housing'
 		}
 
 		return null;
