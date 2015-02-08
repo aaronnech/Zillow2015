@@ -154,6 +154,15 @@ body, html {
 	margin-top: 15px;
 }
 
+.home-detail {
+	padding: 20px;
+}
+
+.home-detail img {
+	max-width: 200px;
+	max-height: 200px;
+}
+
 ul.saved {
 	margin: 0;
 	padding: 0;
@@ -169,6 +178,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 .saved-home p {
 	height: 100%;
 	vertical-align: middle;
+	overflow-x: hidden;
 }
 
 .saved-home img {

@@ -24,6 +24,7 @@ var FilterFormComponent = React.createClass({
     	}
     },
 
+
 	/**
 	 * Render the saved list
 	 */
