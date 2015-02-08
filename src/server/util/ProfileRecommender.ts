@@ -25,7 +25,7 @@ class ProfileRecommender {
 		}
 
 		if (Math.random() > 0.5) {
-			return 'HouseFact: IP is the percentage of your income this home costs';
+			return 'HouseFact: IP is the percentage of your salary the home costs per year';
 		}
 
 		return null;
