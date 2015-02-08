@@ -12,7 +12,7 @@ var HeaderComponent = React.createClass({
 	getScreenText : function () {
 		switch (this.props.screen) {
 			case Constants.SCREENS.HOME: 
-				return "Search Homes";
+				return "Where we help you find the ideal home";
         	case Constants.SCREENS.SETTINGS:
         		return "Settings";
         	case Constants.SCREENS.DETAILS:
