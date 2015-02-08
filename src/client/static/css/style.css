@@ -80,10 +80,10 @@ body, html {
 	font-size: 15px;
 }
 
-.card li p { 
+.card li div p { 
 	font-size: 15px;
 	padding-top: 5px;
-	margin: 0 auto;
+	margin: 0;
 }
 
 .action { 
