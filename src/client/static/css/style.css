@@ -149,6 +149,12 @@ body, html {
 	height: 64px;
 }
 
+.profile-form {
+	padding: 20px;
+}
+
+button
+
 .saved-home img.remove {
 	float: right;
 	margin-top: 15px;
