@@ -11,7 +11,7 @@ var ButterBarComponent = React.createClass({
         var self = this;
         var first = this.props.API.isFirstLaunch();
         var initialMessage = first ?
-                "Welcome to Den! Please fill out the profile information to make your experience better" : "";
+                "Welcome to Casual-Home! Please fill out your personal profile so we can help find the perfect home for you" : "";
 
         if (first) {
             setTimeout(function() {
