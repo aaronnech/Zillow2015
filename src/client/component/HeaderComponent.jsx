@@ -33,7 +33,7 @@ var HeaderComponent = React.createClass({
         return (
 	        <div id="header">
 	        	<img src="img/icon.den.png" />
-	        	<p><strong>Home Finder</strong> : {screenText}</p>
+	        	<p><strong>Casual-Home</strong> : {screenText}</p>
 	        </div>
         );
 	}
