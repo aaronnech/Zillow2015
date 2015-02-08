@@ -80,13 +80,26 @@ var QuizComponent = React.createClass({
                 "commute": this.HOUSE_STATS["commuteB"]
             }});
     },
+
+    submitResponse : function(which) {
+        var qr = {
+            A : this.state.A,
+            B : this.state.B,
+            clicked : which
+        };
+        this.props.profile.pushQuizResponse(qr);
+        this.props.updateLocalProfile();
+    },
+
     onChooseA : function() {
         this.TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.submitResponse("A");
         this.updateAllStats();
     },
 
     onChooseB : function() {
         this.TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.submitResponse("B");
         this.updateAllStats();
     },
     //number from 0-30
