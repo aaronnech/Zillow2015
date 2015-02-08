@@ -6,6 +6,12 @@ var Constants = require('../Constants');
  */
 var CardFrontComponent = React.createClass({
 
+	clickIP : function(e) {
+		this.props.butter.setMessage('IP is the percentage of your income this home costs');
+		e.stopPropagation();
+		return false;
+	},
+
 	/**
 	 * Render the card front
 	 */
@@ -34,7 +40,6 @@ var CardFrontComponent = React.createClass({
 					<img src={home.getImage() || Constants.DEFAULT_HOUSE_IMAGE} />
 					<h2>{priceString} | {home.getAddress()}</h2>
 					<h2>I/P: {IP ? IP + '%' : 'N/A'} | Bed: {home.getBedrooms() ? home.getBedrooms() : 'N/A'}</h2>
-					<h2 className = "IPQuestion">"What's I/P?"</h2>
 		        </div>
 	        );
     	} else {

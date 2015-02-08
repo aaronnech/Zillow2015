@@ -313,9 +313,11 @@ input {
 
 }
 
-.card li h2.IPQuestion {
-	margin-top: -5px;
+.card li a.IPQuestion {
+	margin-top: -15px;
 	font-size: 10px;
+	float: left;
+	margin-left: 100px;
 }
 
 p
