@@ -27,7 +27,7 @@ var SavedHomeComponent = React.createClass({
 	        <li className="saved-home" onClick={this.props.onClickItem} >
 	        	<img src={home.getImage() || Constants.DEFAULT_HOUSE_IMAGE} />
 				<p>{home.getAddress()}</p>
-	        	<img src="img/icon.remove.png" onClick={(function(e) {this.props.onRemoveHome(this); e.stopPropagation();}).bind(this)} className="remove" />
+	        	<img className="remove" src="img/icon.remove.png" onClick={(function(e) {this.props.onRemoveHome(this); e.stopPropagation();}).bind(this)} className="remove" />
 	        </li>
         );
 	}

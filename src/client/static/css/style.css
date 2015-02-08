@@ -193,6 +193,10 @@ li.saved-home:nth-child(odd) {background: #aaa}
 	margin-right: 20px;
 }
 
+.saved-home img.remove {
+	float: right;
+}
+
 
 .nav {
 	display: table;
