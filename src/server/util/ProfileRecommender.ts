@@ -5,7 +5,7 @@ import Profile = require('../../common/model/Profile');
  * based on their profile.
  */
 class ProfileRecommender {
-	private static MYPLAN_THRESHOLD : number = 2000;
+	private static MYPLAN_THRESHOLD : number = 28000;
 
 	constructor() {}
 
