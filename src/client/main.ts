@@ -7,10 +7,21 @@
 var React : any = require('react');
 var AppComponent : any = require('./component/AppComponent.jsx');
 
+// document.addEventListener("deviceready", function() {
+// 	React.render(
+// 	    React.createElement(AppComponent, 
+// 	    	{
+// 	    		 'API' : 'http://tinderhouse.herokuapp.com/api'
+// 	    		 // 'API' : 'http://localhost:1337/api'
+// 	    	}),
+// 	    document.getElementById('content'));
+// }, false);
+
+
 React.render(
     React.createElement(AppComponent, 
     	{
-    		 'API' : 'http://tinderhouse.herokuapp.com/api'
-    		 // 'API' : 'http://localhost:1337/api'
+    		 // 'API' : 'http://tinderhouse.herokuapp.com/api'
+    		 'API' : 'http://localhost:1337/api'
     	}),
     document.getElementById('content'));
