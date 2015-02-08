@@ -125,8 +125,8 @@ var AppComponent = React.createClass({
             <div id="app">
                 <HeaderComponent screen={this.state.active} />
                 <div className={"screen " + (isHome ? "active" : "")}>
-                    <ButterBarComponent API={this.state.API} />
-                	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} profile={this.state.profile} />
+                    <ButterBarComponent ref="butter" API={this.state.API} />
+                	<CardDeckComponent butter={this.refs.butter} onSaveCard={this.onSaveHome} API={this.state.API} profile={this.state.profile} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>
                     <SavedListComponent API={this.state.API} profile={this.state.profile} onClickItem={this.onHomeDetail} onRemoveItem={this.onRemoveHome} data={this.state.savedHomes} />
