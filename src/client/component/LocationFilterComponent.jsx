@@ -51,7 +51,7 @@ var LocationFilterComponent = React.createClass({
             lat : 0,
             lon : 0,
             miles : 0,
-            disabled : this.props.API.isFilterEnabled(this.getName())
+            disabled : !this.props.API.isFilterEnabled(this.getName())
         };
     },
 
@@ -60,7 +60,7 @@ var LocationFilterComponent = React.createClass({
      * @return {boolean} True if enabled, false otherwise
      */
     getEnabled : function() {
-        return !this.state.disabled;
+        return this.state.disabled;
     },
 
     /**
@@ -94,7 +94,7 @@ var LocationFilterComponent = React.createClass({
             var d = R * c;
 
             return d <= value.miles;
-        }, {lat : this.state.lat, lon : this.state.lon, miles : this.state.miles}, this.state.disabled);
+        }, {lat : this.state.lat, lon : this.state.lon, miles : this.state.miles || 0}, !this.state.disabled);
     },
 
     /**
@@ -131,7 +131,7 @@ var LocationFilterComponent = React.createClass({
                         </label>
                     </div>
                     <div className="right">
-                        <input type="number" className="miles" name="miles" value="0" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
+                        <input type="number" className="miles" name="miles" onChange={this.onDistanceChange} placeholder="Distance (mi)" disabled={this.state.disabled} />
                     </div>
                     <div style={{clear: 'both'}}></div>
                 </fieldset>
