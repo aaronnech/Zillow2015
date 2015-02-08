@@ -4,7 +4,11 @@ Description
 This is the CasualHome Project from two humble UW CSE Developers Aaron Nech(@aaronnech) and Daniel Noteboom(@djnoteboom) for the Zillow Winter 2015 Hackathon.
 
 
-We believe that searching for a home should be relaxing, not stressful! CasualHome is a mobile application where we seek to learn as much about people as possible through their profile and help match them with homes and  for a home during any amount of time. While using the app, a personalized profile will be learned over use (swiping homes, taking quizes, and filling out demographic information). It utilizes a aggregated data model and profile intelligence to only show you houses you're interested in from many sources.
+We believe that searching for a home should be relaxing, not stressful! CasualHome is a mobile application where we seek to help you by learning as much about you as possible and then build a profile to present homes to meet your needs. While using the app, a personalized profile will be learned over use (swiping homes, taking quizzes, and filling out demographic information). 
+
+CasualHome utilizes an aggregated data model and profile intelligence to only show you houses you're interested in from many different data sources. We scrape the web from sites such as Craigslist and take advantage of many external datasets such as Accessible Homes Data(is grandma visiting?) and crime rate data(do your kids want to play outside?) to find the perfect home for your needs. What goes into the profile? Many different features such as your weighted preferences for commute-time, great education for your children, or the number of bedrooms. Sound stressful? Don't worry! Simply use our app, and we'll do all this behind the scenes without you having to worry about it.
+
+More curious about how this project works behind the scenes? Check out our diagrams to see how we collect and process the data, and dig into the code yourself. Maybe you'll find a useful component that you can use in your own application.
 
 Technologies, APIs, and Datasets Utilized
 -----------------------------------------
