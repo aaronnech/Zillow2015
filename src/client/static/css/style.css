@@ -190,6 +190,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 .saved-home p {
 	height: 100%;
 	vertical-align: middle;
+	width: 190px;
 	overflow-x: hidden;
 }
 
@@ -201,6 +202,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 
 .saved-home img.remove {
 	float: right;
+	margin-top: 15px;
 }
 
 
