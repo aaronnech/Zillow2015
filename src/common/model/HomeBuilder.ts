@@ -9,7 +9,10 @@ class HomeBuilder {
 	private link : string;
 	private lat : number;
 	private lon : number;
+	private bedrooms : number;
 	private accessibility : any;
+	private address : string;
+	private crimeCount : number;
 
 	// Constructor
 	constructor() {}
@@ -26,7 +29,10 @@ class HomeBuilder {
 				.setImage(json.image || undefined)
 				.setLink(json.link || undefined)
 				.setRentPrice(json.rentPrice || undefined)
-				.setAccessibility(json.accessibility || undefined);
+				.setAccessibility(json.accessibility || undefined)
+				.setBedrooms(json.bedrooms || null)
+				.setCrimeCount(json.securityHits || 0)
+				.setAddress(json.address || undefined);
 	}
 
 	// Getters
@@ -38,10 +44,28 @@ class HomeBuilder {
 	public getLat() : number { return this.lat; }
 	public getLon() : number { return this.lon; }
 	public getAccessibility() : any { return this.accessibility; }
+	public getAddress() : string { return this.address; }
+	public getBedrooms() : number { return this.bedrooms; }
+	public getCrimeCount() : number { return this.crimeCount; }
 
 	// Setters
 	public setAccessibility(accessibility : any) : HomeBuilder {
 		this.accessibility = accessibility;
+		return this;
+	}
+
+	public setCrimeCount(count : number) : HomeBuilder {
+		this.crimeCount = count;
+		return this;
+	}
+
+	public setAddress(address : string) : HomeBuilder {
+		this.address = address;
+		return this;
+	}
+
+	public setBedrooms(bedrooms : number) : HomeBuilder {
+		this.bedrooms = bedrooms;
 		return this;
 	}
 

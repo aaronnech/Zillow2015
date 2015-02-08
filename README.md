@@ -1,7 +1,7 @@
 Description
 -----------
 
-This is the TinderHouse Project for the Zillow Winter 2015 Hackathon.
+This is the TinderHouse Project from Aaron Nech and Daniel Noteboom for the Zillow Winter 2015 Hackathon.
 
 Set Up
 ------
@@ -20,6 +20,22 @@ To compile all TypeScript, and launch the main.js server located in the `server`
 `npm run-script make`
 
 To just compile all TypeScript.
+
+Architecture
+------------
+
+Client:
+
+![Image of Client](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/client.png)
+
+Server:
+
+![Image of Server](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/server.png)
+
+Harvester / Data Pipeline (detailed):
+
+Client Server Venn Diagram:
+
 
 
 Methodology Overview
@@ -71,14 +87,3 @@ The application development style I follow is similar to many Java applications:
 - Every class that depends on another class, imports that class via `import ClassName = require('/path-to-class/ClassName');`
 - Every class TypeScript file is named as `ClassName.ts`
 
-
-Architecture
-------------
-
-Client:
-
-![Image of Client](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/client.png)
-
-Server:
-
-![Image of Server](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/server.png)

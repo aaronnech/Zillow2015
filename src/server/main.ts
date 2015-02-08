@@ -3,6 +3,7 @@
 /// <reference path="../common/def/mongodb.d.ts"/>
 /// <reference path="../common/def/body-parser.d.ts"/>
 /// <reference path="../common/def/node-uuid.d.ts"/>
+/// <reference path="../common/def/request.d.ts"/>
 
 import express = require('express');
 import bodyParser = require('body-parser');

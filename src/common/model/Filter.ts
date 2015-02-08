@@ -3,6 +3,11 @@
  * across a collection to remove models that don't match.
  */
 class Filter {
+	//TODO: For safety purposes, we shouldn't directly take a function
+	//		from the client (although we can sandbox).
+	//		Instead create a dictionary of every filter function
+	//		and refer to that such that it is clean.
+
 	private allowed : Function;
 	private disabled : boolean;
 	private value : any;

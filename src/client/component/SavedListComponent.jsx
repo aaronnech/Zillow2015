@@ -18,6 +18,20 @@ var SavedListComponent = React.createClass({
 		};
 	},
 
+    /**
+     * Called when the component updates
+     */
+    componentDidUpdate: function() {
+        this.updateLocalSavedHome();
+    },
+
+	/**
+     * Updates the saved list in local storage
+     */
+    updateLocalSavedHome : function() {
+        this.props.API.updateLocalSavedHome(this.props.data);
+    },
+
 	/**
 	 * Called when a item is removed
 	 * @param  {number} key item index
@@ -42,7 +56,7 @@ var SavedListComponent = React.createClass({
 	        	<ul className="saved">
 				{this.props.data.map(function(item, i) {
 					return (
-						<SavedHomeComponent onRemoveHome={this.onRemoveItem} onClickItem={this.onClickLater(item)} key={i} data={item} />
+						<SavedHomeComponent profile={this.props.profile} onRemoveHome={this.onRemoveItem} onClickItem={this.onClickLater(item)} key={i} data={item} />
 					);
 				}.bind(this))}
 	        	</ul>

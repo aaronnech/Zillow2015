@@ -93,7 +93,6 @@ var QuizComponent = React.createClass({
             return "green";
         else 
             return "yellow";
-
     },
 
 	/**
