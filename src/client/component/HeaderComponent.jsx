@@ -16,7 +16,7 @@ var HeaderComponent = React.createClass({
         	case Constants.SCREENS.SETTINGS:
         		return "Settings";
         	case Constants.SCREENS.DETAILS:
-        		return "Home Details";
+        		return "Home Profile";
         	case Constants.SCREENS.LIST:
         		return "Saved Homes";
         	case Constants.SCREENS.PROFILE:
