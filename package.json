@@ -12,9 +12,10 @@
 
     "compile-ts": "cd src; find . -name \"*.ts\" | xargs ../node_modules/.bin/tsc --module commonjs; cd ..",
     "bundle-client" : "cd src/client; ../../node_modules/.bin/browserify main.js -t reactify -o static/js/main.js; cd ../..",
+    "bundle-client-prod" : "cd src/client; ../../node_modules/.bin/browserify main.js -g uglifyify -t reactify -o static/js/main.js; cd ../..",
 
     "harvest" : "npm run-script make && node src/server/harvest.js",
-    "make" : "npm run-script compile-ts && npm run-script bundle-client",
+    "make" : "npm run-script compile-ts && npm run-script bundle-client-prod",
     "serve" : "npm run-script make && node src/server/main.js",
 
     "start": "npm run-script serve"
@@ -27,6 +28,7 @@
     "cordova" : "latest",
     "react" : "latest",
     "reactify" : "latest",
+    "uglifyify" : "latest",
     "hammerjs" : "latest",
     "jquery" : "latest",
     "request" : "latest",

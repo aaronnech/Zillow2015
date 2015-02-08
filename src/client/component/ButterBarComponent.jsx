@@ -60,6 +60,14 @@ var ButterBarComponent = React.createClass({
     },
 
     /**
+     * Force message
+     */
+    setMessage : function(msg) {
+        this.setState({message : next, show : true});
+        this.blink();
+    },
+
+    /**
      * Blinks the butter bar
      */
     blink : function() {

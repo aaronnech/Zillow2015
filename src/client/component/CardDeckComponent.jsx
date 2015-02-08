@@ -59,7 +59,7 @@ var CardDeckComponent = React.createClass({
 		var self = this;
 		this.props.API.getNextHomes(function(homes) {
 			if (homes.length == 0) {
-				setTimeout(self.addMoreCardsToDeck, 2000);
+				setTimeout(self.addMoreCardsToDeck, 5000);
 			} else {
 				// Update state
 				self.setState({cards : self.state.cards.concat(homes)});
@@ -156,7 +156,7 @@ var CardDeckComponent = React.createClass({
 							return (
 								<li key={i} className={isActive ? "active" : ""} style={isActive ? {"-webkit-transform": this.state.activeCardTransform} : {"-webkit-transform": this.getCardPositionStyle(0,0,0)}}>
 									<div className="front" style={((!this.state.showBack && isActive) || !isActive) ? {'display' : 'block'} : {'display' : 'none'}}>
-										<CardFrontComponent profile={this.props.profile} data={card} />
+										<CardFrontComponent butter={this.refs.butter} profile={this.props.profile} data={card} />
 									</div>
 									<div className="back" style={(isActive && this.state.showBack) ? {'display' : 'block'} : {'display' : 'none'}}>
 										<CardBackComponent profile={this.props.profile} data={card} />

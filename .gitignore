@@ -14,7 +14,7 @@
 *.map
 _cordova
 _cordova/*
-# src/server/DBConfig.ts
+src/server/DBConfig.ts
 !src/client/static/js/vendor/*
 
 node_modules/
