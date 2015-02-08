@@ -57,7 +57,7 @@ var QuizComponent = React.createClass({
         if(this.total_size != 0) {
             increment = this.total_size / this.attributes.length;
             for(i = 0; i < this.attributes.length; i++) {
-                if( 31 - ths.HOUSE_STATS[this.attributes[i] + house] >= increment) {
+                if( 31 - this.HOUSE_STATS[this.attributes[i] + house] >= increment) {
                     this.HOUSE_STATS[this.attributes[i] + house] += increment;
                     this.HOUSE_STATS[this.attributes[i] + house] = 31;
                 }
