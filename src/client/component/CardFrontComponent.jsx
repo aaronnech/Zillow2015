@@ -38,8 +38,8 @@ var CardFrontComponent = React.createClass({
 	        return (
 		        <div>
 					<img src={home.getImage() || Constants.DEFAULT_HOUSE_IMAGE} />
-					<h2>{priceString} | {home.getAddress()}</h2>
-					<h2>I/P: {IP ? IP + '%' : 'N/A'} | Bed: {home.getBedrooms() ? home.getBedrooms() : 'N/A'}</h2>
+					<p><strong>{priceString}</strong> | {home.getAddress()}</p>
+					<p><strong>I/P:</strong> {IP ? IP + '%' : 'N/A'} | <strong>Bed:</strong> {home.getBedrooms() ? home.getBedrooms() : 'N/A'}</p>
 		        </div>
 	        );
     	} else {

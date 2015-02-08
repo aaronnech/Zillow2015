@@ -80,6 +80,12 @@ body, html {
 	font-size: 15px;
 }
 
+.card li p { 
+	font-size: 15px;
+	padding-top: 5px;
+	margin: 0 auto;
+}
+
 .action { 
 	width: 80px;
 	height: 80px;
