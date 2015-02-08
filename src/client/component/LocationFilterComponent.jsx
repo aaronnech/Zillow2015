@@ -20,6 +20,13 @@ var LocationFilterComponent = React.createClass({
     },
 
     /**
+     * Called when the component updates
+     */
+    componentDidUpdate: function() {
+        this.props.onChangeFilter(this);
+    },
+
+    /**
      * Located successfully
      */
     onLocateSuccess : function(position) {
@@ -44,7 +51,7 @@ var LocationFilterComponent = React.createClass({
             lat : 0,
             lon : 0,
             miles : 0,
-            disabled : true
+            disabled : this.props.API.isFilterEnabled(this.getName())
         };
     },
 

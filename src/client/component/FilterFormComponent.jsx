@@ -31,6 +31,7 @@ var FilterFormComponent = React.createClass({
     render : function() {
         return (
 	        <div className="filter-form">
+	        	<LocationFilterComponent API={this.props.API} onChangeFilter={this.onFilterChange} />
                 <SourceFilterComponent API={this.props.API} onChangeFilter={this.onFilterChange} displayName="Craigslist" filterId="craigslist" source="craigslist" />
                 <SourceFilterComponent API={this.props.API} onChangeFilter={this.onFilterChange} displayName="King County Accessible Housing" filterId="kcaccess" source="kkaccessible" />
 	        </div>
