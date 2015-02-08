@@ -51,6 +51,7 @@ var AppComponent = React.createClass({
         return {
             active : Constants.SCREENS.HOME,
             detailHome : null,
+            butter : null,
             savedHomes : api.getLocalSavedHome(),
             profile : profile,
             API : api
@@ -93,6 +94,13 @@ var AppComponent = React.createClass({
     },
 
     /**
+     * Initialize
+     */
+    componentDidMount : function() {
+        this.setState({butter : this.refs.butter});
+    },
+
+    /**
      * Render the application
      */
     render : function() {
@@ -126,7 +134,7 @@ var AppComponent = React.createClass({
                 <HeaderComponent screen={this.state.active} />
                 <div className={"screen " + (isHome ? "active" : "")}>
                     <ButterBarComponent ref="butter" API={this.state.API} />
-                	<CardDeckComponent butter={this.refs.butter} onSaveCard={this.onSaveHome} API={this.state.API} profile={this.state.profile} />
+                	<CardDeckComponent butter={this.state.butter} onSaveCard={this.onSaveHome} API={this.state.API} profile={this.state.profile} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>
                     <SavedListComponent API={this.state.API} profile={this.state.profile} onClickItem={this.onHomeDetail} onRemoveItem={this.onRemoveHome} data={this.state.savedHomes} />

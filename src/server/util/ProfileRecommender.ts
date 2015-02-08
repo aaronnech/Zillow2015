@@ -24,6 +24,10 @@ class ProfileRecommender {
 			return "Your income may qualify you for MyPlan. <a href=\"data.gov\">Learn more</a>";
 		}
 
+		if (Math.random() > 0.5) {
+			return 'HouseFact: IP is the percentage of your salary the home costs per year';
+		}
+
 		return null;
 	}
 }
