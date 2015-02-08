@@ -256,6 +256,7 @@ input {
 	float: left;
 	border: 1px;
 	opacity: 0.5;
+	position: relative;
 }
 
 .houseB {
@@ -264,6 +265,7 @@ input {
     min-height: 100px;
     border: 1px;
     opacity: 0.5;
+    position: relative;
 }
 
 .ratingBar {
@@ -275,8 +277,13 @@ input {
 }
 
 .housepic {
-	max-height: 100px;
-	max-width: 100px;
+	width: 30%;
+	margin-left: 31%;
+	margin-bottom: 5%;
+	opacity: 0.3;
+	float: left;
+	position: absolute; top: 0; left: 0;
+
 }
 
 

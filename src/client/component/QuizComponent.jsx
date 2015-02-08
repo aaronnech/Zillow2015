@@ -5,7 +5,7 @@ var Constants = require('../Constants');
  * Encapsulates the profile form
  */
 var QuizComponent = React.createClass({
-    BAR_SIZE : 4,
+    BAR_SIZE : 3,
     /**
      * Get the initial state
      */
@@ -69,8 +69,8 @@ var QuizComponent = React.createClass({
         	<div className="quiz-component">
                 <div className="houseA" onClick = {this.onChooseA}>
                 Option_A
-                    <div>
-                       <img src = "https://s3.amazonaws.com/zillowhacknechboom/house_picture.png" /> 
+                    <div >
+                       <img className="housepic" src = "https://s3.amazonaws.com/zillowhacknechboom/house_picture.png" /> 
                        </div>
                     <div className="ratingname"> lack of crime </div>
                     <div className="ratingBar"
@@ -107,6 +107,9 @@ var QuizComponent = React.createClass({
 
                 <div className="houseB" onClick = {this.onChooseB}>
                     Option_B
+                    <div >
+                       <img className="housepic" src = "https://s3.amazonaws.com/zillowhacknechboom/house_picture.png" /> 
+                       </div>
 				 <div className="ratingname"> lack of crime </div>
                     <div className="ratingBar"
                         style={{
