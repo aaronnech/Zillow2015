@@ -52,8 +52,8 @@ var QuizComponent = React.createClass({
     },
 
     updateStats : function(house) {
-        for(i = 0; i < this.attributes.length; i++) {
-            rating = this.getRating(this.randomRating())
+        for(i = 0; i < this.attributes.length; i++) { 
+            rating = this.getRating(this.randomRating());
             this.HOUSE_STATS[this.attributes[i] + house] = rating;
         }
         //heuristic to try to keep the sides of the house equal
