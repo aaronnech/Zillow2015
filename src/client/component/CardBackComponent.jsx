@@ -12,6 +12,7 @@ var CardBackComponent = React.createClass({
     },
 
     getColor : function(value) {
+        console.log(value);
         if(value < this.BAR_SIZE * 10 / 3 )
             return "red";
         else if(value > this.BAR_SIZE * 20 / 3)
