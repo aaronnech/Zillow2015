@@ -169,6 +169,12 @@ button
 	max-height: 200px;
 }
 
+.miles {
+	width: 100px;
+	min-width: 100px;
+	margin-top: 10px;
+}
+
 ul.saved {
 	margin: 0;
 	padding: 0;
