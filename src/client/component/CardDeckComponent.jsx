@@ -58,10 +58,14 @@ var CardDeckComponent = React.createClass({
 	addMoreCardsToDeck : function() {
 		var self = this;
 		this.props.API.getNextHomes(function(homes) {
-			// Update state
-			self.setState({cards : self.state.cards.concat(homes)});
-			if (self.state.activeCard == undefined) {
-				self.setState({activeCard : self.state.cards[0]});
+			if (homes.length == 0) {
+				setTimeout(self.addMoreCardsToDeck, 2000);
+			} else {
+				// Update state
+				self.setState({cards : self.state.cards.concat(homes)});
+				if (self.state.activeCard == undefined) {
+					self.setState({activeCard : self.state.cards[0]});
+				}
 			}
 		});
 	},

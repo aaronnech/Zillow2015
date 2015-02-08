@@ -149,6 +149,11 @@ body, html {
 	height: 64px;
 }
 
+.saved-home img.remove {
+	float: right;
+	margin-top: 15px;
+}
+
 ul.saved {
 	margin: 0;
 	padding: 0;
@@ -212,6 +217,7 @@ li.saved-home:nth-child(odd) {background: #aaa}
 }
 
 .filter .left {
+	margin-top: 10px;
 	float: left;
 }
 

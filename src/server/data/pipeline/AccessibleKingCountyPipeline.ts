@@ -1,5 +1,8 @@
 import Pipeline = require('./Pipeline');
 
+/**
+ * Gets homes from a collection of accessibility data on homes
+ */
 class AccessibleKingCountyPipeline implements Pipeline {
 	private static FILE : string = "../source/kingcountyaccessible.json";
 	private data : any;
@@ -30,17 +33,18 @@ class AccessibleKingCountyPipeline implements Pipeline {
 		
 		for (var i : number = 0; i < this.data.data.length; i++) {
 			var row : any = this.data.data[i];
+			var loc : any = row[row.length - 1];
 
 			// Access indicies
-			var lon = row.length - 3;
-			var lat = row.length - 4;
+			var lon = loc.length - 3;
+			var lat = loc.length - 4;
 			var taken = 10;
 			var desc = 9;
 
 			if (row[taken] != 'Rented') {
 				result.push({
-						'lat' : Number(row[lat]),
-						'lon' : Number(row[lon]),
+						'lat' : Number(loc[lat]),
+						'lon' : Number(loc[lon]),
 						'description' : row[desc]
 					});
 			}
