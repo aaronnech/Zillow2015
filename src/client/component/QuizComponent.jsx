@@ -5,44 +5,81 @@ var Constants = require('../Constants');
  * Encapsulates the profile form
  */
 var QuizComponent = React.createClass({
+    //How large is the bar
     BAR_SIZE : 3,
+    //Calculated based on the number of features and size of bars
+    FINAL_TOTAL_SIZE : 64,
+    TOTAL_SIZE : this.FINAL_TOTAL_SIZE,
+
+
+    //Map that keeps track of all the house stats
+    HOUSE_STATS : {},
+
+    attributes : ["crime", "education", "homesize", "commute"],
+
+
     /**
      * Get the initial state
      */
     getInitialState : function() {
+        this.updateStats("A");
+
+        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.updateStats("B");
         return {
             "A" : {
-                "crime": this.randomRating(),
-                "education": this.randomRating(),
-                "homesize": this.randomRating(),
-                "commute": this.randomRating()
+                "crime": this.HOUSE_STATS["crimeA"],
+                "education": this.HOUSE_STATS["educationA"],
+                "homesize": this.HOUSE_STATS["homesizeA"],
+                "commute": this.HOUSE_STATS["commuteA"]
             },
             "B" : {
-                "crime": this.randomRating(),
-                "education": this.randomRating(),
-                "homesize": this.randomRating(),
-                "commute": this.randomRating()
+                "crime": this.HOUSE_STATS["crimeB"],
+                "education": this.HOUSE_STATS["educationB"],
+                "homesize": this.HOUSE_STATS["homesizeB"],
+                "commute": this.HOUSE_STATS["commuteB"]
             }
         };
     },
 
+    updateStats : function(house) {
+        function getRating(rating) {
+            if(rating > this.TOTAL_SIZE)
+                rating = this.TOTAL_SIZE;
+            this.TOTAL_SIZE -= rating;
+            return rating;
+        };
+        for(i = 0; i < this.attributes.length; i++) {
+            rating = getRating(this.randomRating())
+            console.log("the rating for " + this.attributes[i] + " is "  + rating);
+            this.HOUSE_STATS[this.attributes[i] + house] = rating;
+        }
+        if(this.total_size != 0) {
+            increment = this.total_size / this.attributes.length;
+            for(i = 0; i < this.attributes.length; i++) {
+                if( 31 - ths.HOUSE_STATS[this.attributes[i] + house] >= increment) {
+                    this.HOUSE_STATS[this.attributes[i] + house] += increment;
+                    this.HOUSE_STATS[this.attributes[i] + house] = 31;
+                }
+            }
+        }
+        
+
+    },
+
     onChooseA : function() {
-        console.log("crime " + this.state.A.crime);
-        console.log("education " + this.state.A.education);
-        console.log("homesize " + this.state.A.homesize);
-        console.log("commute " + this.state.A.commute);
-        console.log("barsize " +  this.BAR_SIZE * 10 / 3);
+        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.updateStats("A");
+
 
 
     },
 
     onChooseB : function() {
-        console.log("chooseB called");
-        console.log("crime " + this.state.B.crime);
-        console.log("education " + this.state.B.education);
-        console.log("homesize " + this.state.B.homesize);
-        console.log("commute " + this.state.B.commute);
-        console.log("barsize " +  this.BAR_SIZE * 10 / 3);
+        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.updateStats("B");
+
+
     },
     //number from 0-30
     randomRating : function() {
@@ -52,7 +89,7 @@ var QuizComponent = React.createClass({
     getColor : function(value) {
         if(value < this.BAR_SIZE * 10 / 3 )
             return "red";
-        else if(value > this.BAR_SIZE * 20 / 3)
+        else if(value >= this.BAR_SIZE * 20 / 3)
             return "green";
         else 
             return "yellow";
