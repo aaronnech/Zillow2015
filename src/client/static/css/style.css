@@ -13,6 +13,11 @@ body, html {
 	background: #fdfff6;
 }
 
+.profile-form button {
+	border: none;
+	margin-left: 20px;
+}
+
 #content, #app {
 	position:relative;
 	width: 100%;
