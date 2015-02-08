@@ -51,7 +51,7 @@ var AppComponent = React.createClass({
         return {
             active : Constants.SCREENS.HOME,
             detailHome : null,
-            savedHomes : [],
+            savedHomes : api.getLocalSavedHome(),
             profile : profile,
             API : api
         };
@@ -126,16 +126,16 @@ var AppComponent = React.createClass({
                 <HeaderComponent screen={this.state.active} />
                 <div className={"screen " + (isHome ? "active" : "")}>
                     <ButterBarComponent API={this.state.API} />
-                	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} />
+                	<CardDeckComponent onSaveCard={this.onSaveHome} API={this.state.API} profile={this.state.profile} />
                 </div>
                 <div className={"screen " + (isList ? "active" : "")}>
-                    <SavedListComponent onClickItem={this.onHomeDetail} onRemoveItem={this.onRemoveHome} data={this.state.savedHomes} />
+                    <SavedListComponent API={this.state.API} profile={this.state.profile} onClickItem={this.onHomeDetail} onRemoveItem={this.onRemoveHome} data={this.state.savedHomes} />
                 </div>
                 <div className={"screen " + (isSettings ? "active" : "")}>
                     <FilterFormComponent API={this.state.API} />
                 </div>
                 <div className={"screen " + (isDetails ? "active" : "")}>
-                    <HomeDetailComponent data={this.state.detailHome} />
+                    <HomeDetailComponent profile={this.state.profile} data={this.state.detailHome} />
                 </div>
                 <div className={"screen " + (isProfile ? "active" : "")}>
                     <ProfileFormComponent data={this.state.profile} />

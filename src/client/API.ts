@@ -214,6 +214,32 @@ class API {
 	}
 
 	/**
+	 * Saves the homes locally that we saved
+	 * @param {Home[]} homes homes to update
+	 */
+	public updateLocalSavedHome(homes : Home[]) : void {
+		var json = homes.map((home) => {
+				return home.toJSON();
+			});
+
+		window.localStorage.setItem('homes', JSON.stringify(json));
+	}
+
+	/**
+	 * Get the homes locally that we saved
+	 * @return {Home[]} homes homes from local storage
+	 */
+	public getLocalSavedHome() : Home[] {
+		var homes = window.localStorage.getItem('homes');
+		if (!homes) return [];
+
+		var arr = JSON.parse(homes);
+		return arr.map((json) => {
+				return new Home(HomeBuilder.fromJSON(json));
+			});
+	}
+
+	/**
 	 * Gets the next set of homes, along with other piggy-back meta data
 	 * @param {Filter[]} filters to apply to the candidate homes
 	 * @param {Function} callback callback to return the result to.

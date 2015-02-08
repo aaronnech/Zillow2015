@@ -41,13 +41,15 @@ class AccessibleKingCountyPipeline implements Pipeline {
 			var lat = loc.length - 4;
 			var taken = 10;
 			var desc = 9;
+			var bedrooms = 14;
 
 			if (row[taken] != 'Rented') {
 				result.push({
 						'lat' : Number(loc[lat]),
 						'lon' : Number(loc[lon]),
 						'description' : row[desc],
-						'address' : row[address]
+						'address' : row[address],
+						'bedrooms' : Number(row[bedrooms])
 					});
 			}
 		}

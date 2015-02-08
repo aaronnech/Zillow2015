@@ -19,7 +19,9 @@ class Home {
 	public getLink() : string { return this.builder.getLink(); }
 	public getLat() : number { return this.builder.getLat(); }
 	public getLon() : number { return this.builder.getLon(); }
+	public getBedrooms() : number { return this.builder.getBedrooms(); }
 	public getAccessibility() : any { return this.builder.getAccessibility(); }
+	public getCrimeCount() : number { return this.builder.getCrimeCount(); }
 
 	public toJSON() : any {
 		return {
@@ -31,7 +33,9 @@ class Home {
 			'link' : this.builder.getLink(),
 			'lon' : this.builder.getLon(),
 			'lat' : this.builder.getLat(),
-			'accessibility' : this.builder.getAccessibility()
+			'bedrooms' : this.builder.getBedrooms(),
+			'accessibility' : this.builder.getAccessibility(),
+			'getCrimeCount' : this.builder.getCrimeCount()
 		};
 	}
 }

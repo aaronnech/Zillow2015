@@ -47,9 +47,13 @@ class HomeSafetyMetaPipeline implements Pipeline {
 									  + ', 1000) AND event_clearance_date > \'2015-01-20\''
 						}
 				}, (err, response, body) => {
-						var finished = this.home;
+					var finished = this.home;
+					if (response.body) {
 						finished.securityHits = JSON.parse(response.body).length;
-						callback(this, finished);
+					} else {
+						finished.securityHits = 0;
+					}
+					callback(this, finished);
 				}
 		);
 	}

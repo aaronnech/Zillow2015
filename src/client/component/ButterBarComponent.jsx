@@ -76,7 +76,7 @@ var ButterBarComponent = React.createClass({
     render : function() {
         return (
 	        <div className={"butter-bar " + (this.state.blink ? "blink" : "")} onClick={this.blink} style={{'display' : (this.state.show ? 'block' : 'none')}}>
-                <p>{this.state.message}</p>
+                <p dangerouslySetInnerHTML={{__html: this.state.message}}></p>
                 <img className="close-button" src="img/icon.remove.png" onClick={this.dismiss} />
 	        </div>
         );

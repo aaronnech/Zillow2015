@@ -60,13 +60,16 @@ class CraigslistPipeline implements Pipeline {
             price = price.trim().replace('$', '');
             var location = elem.find('.pnr > small').text();
             location = location.trim().replace(')', '').replace('(', '');
+            var brString = elem.find('.housing').text().split(/[ ]+/)[1];
+            var br = brString ? Number(brString.replace('br', '')) : null;
 
             this.data.push({
             	'timeStamp' : timeStamp,
             	'description' : description,
             	'rentPrice' : price,
             	'address' : location,
-            	'link' : link
+            	'link' : link,
+            	'bedrooms' : br
             });
 
 
