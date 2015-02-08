@@ -20,7 +20,7 @@ var HeaderComponent = React.createClass({
         	case Constants.SCREENS.LIST:
         		return "Saved Homes";
         	case Constants.SCREENS.PROFILE:
-        		return "Searcher Profile";
+        		return "Your personal profile";
 		}
 		return "";
 	},
@@ -33,7 +33,7 @@ var HeaderComponent = React.createClass({
         return (
 	        <div id="header">
 	        	<img src="img/icon.den.png" />
-	        	<p><strong>Den</strong> : {screenText}</p>
+	        	<p><strong>Home Finder</strong> : {screenText}</p>
 	        </div>
         );
 	}
