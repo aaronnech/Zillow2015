@@ -1,7 +1,54 @@
 Description
 -----------
 
-This is the TinderHouse Project from Aaron Nech and Daniel Noteboom for the Zillow Winter 2015 Hackathon.
+This is the CasualHome Project from two humble UW CSE Developers Aaron Nech(@aaronnech) and Daniel Noteboom(@djnoteboom) for the Zillow Winter 2015 Hackathon.
+
+
+CasualHome is a mobile application that is fun and relaxing to use to search for a home during any amount of time. While using the app, a personalized profile will be learned over use (swiping homes, taking quizes, and filling out demographic information). It utilizes a aggregated data model and profile intelligence to only show you houses you're interested in from many sources.
+
+Technologies, APIs, and Datasets Utilized
+-----------------------------------------
+
+### Technologies
+
+Client
+-TypeScript
+-React JS
+-Browserify
+-JQuery
+-Cordova (PhoneGap)
+
+Server
+-TypeScript
+-HammerJS
+-ExpressJS
+-MongoDB
+
+
+### Datasets
+
+Seattle Crime Rates (data.seattle.gov)
+King County Accessible Homes Data (`src/server/data/source/kingcountyaccessibility.json`)
+Craigslist (http://seattle.craigslist.org)
+
+### APIS
+
+Seattle Data API (data.seattle.gov)
+
+Architecture
+------------
+
+### Client Overview
+
+![Image of Client](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/client.png)
+
+### Server Overview
+
+![Image of Server](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/server.png)
+
+### Harvester / Data Pipeline (detailed)
+
+![Image of Harvester](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/harvester.png)
 
 Set Up
 ------
@@ -20,22 +67,6 @@ To compile all TypeScript, and launch the main.js server located in the `server`
 `npm run-script make`
 
 To just compile all TypeScript.
-
-Architecture
-------------
-
-Client:
-
-![Image of Client](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/client.png)
-
-Server:
-
-![Image of Server](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/server.png)
-
-Harvester / Data Pipeline (detailed):
-
-Client Server Venn Diagram:
-
 
 
 Methodology Overview
@@ -72,11 +103,6 @@ To run the application on android simply run:
 
 Assuming you have all the dependencies installed (e.g. cordova, android SDK, emulator / deviced plugged in). This script will create a `_cordova` directory which will contain a copy of your post-compiled `src/client/static` directory, and some settings copied in.
 
-GitIgnore
----------
-
-The project is initially setup to ignore common ide files, and built JavaScript / map files. JavaScript files in the `src/common/vendor` directory are not ignored. As a general rule, post-compiled files should not be part of the source.
-
 Development Style
 -----------------
 
@@ -87,3 +113,6 @@ The application development style I follow is similar to many Java applications:
 - Every class that depends on another class, imports that class via `import ClassName = require('/path-to-class/ClassName');`
 - Every class TypeScript file is named as `ClassName.ts`
 
+License
+-------
+MIT (see LICENSE.md).
