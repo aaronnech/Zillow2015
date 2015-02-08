@@ -25,11 +25,11 @@ var CardFrontComponent = React.createClass({
 
 			var IP = null;
 			if (this.props.profile.getSalary() && home.getRentPrice()) {
-				IP = Math.floor(this.props.profile.getSalary() / (home.getRentPrice() * 12) * 100);
+				IP = Math.floor((home.getRentPrice() * 12) / this.props.profile.getSalary() * 100);
 				salary = this.props.profile.getSalary();
 				rent_price = home.getRentPrice() * 12;
 			} else if (this.props.profile.getSalary() && home.getBuyPrice()) {
-				IP = Math.floor(this.props.profile.getSalary() / home.getBuyPrice() * 100);
+				IP = Math.floor((home.getBuyPrice()) / this.props.profile.getSalary() * 100);
 			}
 
 	        return (
