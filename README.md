@@ -12,24 +12,26 @@ Technologies, APIs, and Datasets Utilized
 ### Technologies
 
 Client
--TypeScript
--React JS
--Browserify
--JQuery
--Cordova (PhoneGap)
+
+1. TypeScript
+2. React JS
+3. Browserify
+4. JQuery
+5. Cordova (PhoneGap)
 
 Server
--TypeScript
--HammerJS
--ExpressJS
--MongoDB
+
+1. TypeScript
+2. HammerJS
+3. ExpressJS
+4. MongoDB
 
 
 ### Datasets
 
-Seattle Crime Rates (data.seattle.gov)
-King County Accessible Homes Data (`src/server/data/source/kingcountyaccessibility.json`)
-Craigslist (http://seattle.craigslist.org)
+1. Seattle Crime Rates (data.seattle.gov)
+2. King County Accessible Homes Data (`src/server/data/source/kingcountyaccessibility.json`)
+3. Craigslist (http://seattle.craigslist.org)
 
 ### APIS
 

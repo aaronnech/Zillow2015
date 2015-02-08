@@ -59,7 +59,7 @@ var CardDeckComponent = React.createClass({
 		var self = this;
 		this.props.API.getNextHomes(function(homes) {
 			if (homes.length == 0) {
-				setTimeout(self.addMoreCardsToDeck, 2000);
+				setTimeout(self.addMoreCardsToDeck, 5000);
 			} else {
 				// Update state
 				self.setState({cards : self.state.cards.concat(homes)});
