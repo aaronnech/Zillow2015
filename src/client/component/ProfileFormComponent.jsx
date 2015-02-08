@@ -75,11 +75,11 @@ var ProfileFormComponent = React.createClass({
 					<div><input ref="age" type="number" className="age" min="12" max="138" name="age" onChange={this.onAgeChange} placeholder="Age (yrs)" /></div>
 				</fieldset>
 				<fieldset>
-					<legend>HomeQuiz</legend>
+					<legend>Personal Profile Quiz</legend>
 					<p style={{'display' : this.state.showQuiz ? 'none' : 'block'}}>
 						Tell us about which homes you prefer <button onClick={(function() { this.setState({showQuiz : true}) }).bind(this)}>START</button>
 					</p>
-					<p style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>Tap which one you prefer</p>
+					<p style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>Tap the house you prefer</p>
                     <div style={{'display' : this.state.showQuiz ? 'block' : 'none'}}>
                     	<QuizComponent style={{'margin': 'auto'}} profile={profile} updateLocalProfile={this.updateLocalProfile} />
                     </div>

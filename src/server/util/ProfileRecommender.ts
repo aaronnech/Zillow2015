@@ -25,10 +25,12 @@ class ProfileRecommender {
 		}
 
 		if (Math.random() > 0.3) {
-			if(Math.random() > .5)
+			if(Math.random() > .66)
 				return 'Fun HouseFact: IP is the % of income spent on home';
-			else
+			else if(Math.random() > .5)
 				return 'Fun HouseFact: Cost-Burdened: when more than 30% of income(IP) is spent on housing'
+			else 
+				return 'Help tip: Have you done our house comparison quiz? We can help you find better homes.'
 		}
 
 		return null;
