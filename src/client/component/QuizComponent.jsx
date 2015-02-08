@@ -9,7 +9,7 @@ var QuizComponent = React.createClass({
     BAR_SIZE : 3,
     //Calculated based on the number of features and size of bars
     FINAL_TOTAL_SIZE : 64,
-    TOTAL_SIZE : this.FINAL_TOTAL_SIZE,
+    TOTAL_SIZE : 64,
 
 
     //Map that keeps track of all the house stats
@@ -22,10 +22,11 @@ var QuizComponent = React.createClass({
      * Get the initial state
      */
     getInitialState : function() {
+
         this.updateStats("A");
 
-        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
         this.updateStats("B");
+
         return {
             "A" : {
                 "crime": this.HOUSE_STATS["crimeA"],
@@ -42,44 +43,51 @@ var QuizComponent = React.createClass({
         };
     },
 
-    updateStats : function(house) {
-        function getRating(rating) {
-            if(rating > this.TOTAL_SIZE)
-                rating = this.TOTAL_SIZE;
-            this.TOTAL_SIZE -= rating;
+    getRating : function(rating) {
+            if(rating > this.TOTAL_SIZE) 
+                rating = this.TOTAL_SIZE == 0 ? 1 : this.TOTAL_SIZE;
+            this.TOTAL_SIZE = rating > this.TOTAL_SIZE ? 0 : this.TOTAL_SIZE - rating;
+
             return rating;
-        };
+    },
+
+    updateStats : function(house) {
         for(i = 0; i < this.attributes.length; i++) {
-            rating = getRating(this.randomRating())
+            rating = this.getRating(this.randomRating())
             console.log("the rating for " + this.attributes[i] + " is "  + rating);
             this.HOUSE_STATS[this.attributes[i] + house] = rating;
         }
-        if(this.total_size != 0) {
-            increment = this.total_size / this.attributes.length;
-            for(i = 0; i < this.attributes.length; i++) {
-                if( 31 - this.HOUSE_STATS[this.attributes[i] + house] >= increment) {
-                    this.HOUSE_STATS[this.attributes[i] + house] += increment;
-                    this.HOUSE_STATS[this.attributes[i] + house] = 31;
-                }
-            }
-        }
-        
+        //heuristic to try to keep the sides of the house equal
+        this.TOTAL_SIZE = this.FINAL_TOTAL_SIZE;   
 
     },
-
-    onChooseA : function() {
-        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+    updateAllStats: function() {
         this.updateStats("A");
-
-
-
+        this.updateStats("B");
+        this.state.A.crime = this.HOUSE_STATS["crimeA"];
+        console.log("updated crime is " + this.state.A.crime);
+        this.setState({
+            "A" : {
+                "crime": this.HOUSE_STATS["crimeA"],
+                "education": this.HOUSE_STATS["educationA"],
+                "homesize": this.HOUSE_STATS["homesizeA"],
+                "commute": this.HOUSE_STATS["commuteA"]
+            },
+            "B" : {
+                "crime": this.HOUSE_STATS["crimeB"],
+                "education": this.HOUSE_STATS["educationB"],
+                "homesize": this.HOUSE_STATS["homesizeB"],
+                "commute": this.HOUSE_STATS["commuteB"]
+            }});
+    },
+    onChooseA : function() {
+        this.TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.updateAllStats();
     },
 
     onChooseB : function() {
-        TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
-        this.updateStats("B");
-
-
+        this.TOTAL_SIZE = this.FINAL_TOTAL_SIZE;
+        this.updateAllStats();
     },
     //number from 0-30
     randomRating : function() {
