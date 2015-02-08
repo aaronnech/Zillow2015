@@ -53,8 +53,7 @@ var QuizComponent = React.createClass({
 
     updateStats : function(house) {
         for(i = 0; i < this.attributes.length; i++) {
-            rating = this.getRating(this.randomRating())
-            console.log("the rating for " + this.attributes[i] + " is "  + rating);
+            rating = this.getRating(this.randomRating());
             this.HOUSE_STATS[this.attributes[i] + house] = rating;
         }
         //heuristic to try to keep the sides of the house equal
@@ -65,7 +64,6 @@ var QuizComponent = React.createClass({
         this.updateStats("A");
         this.updateStats("B");
         this.state.A.crime = this.HOUSE_STATS["crimeA"];
-        console.log("updated crime is " + this.state.A.crime);
         this.setState({
             "A" : {
                 "crime": this.HOUSE_STATS["crimeA"],
