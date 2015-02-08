@@ -70,7 +70,6 @@ var AppComponent = React.createClass({
      * @param  {number} key item index
      */
     onRemoveHome : function(key) {
-        console.log(key);
         var homes = this.state.savedHomes.slice(0);
         homes.splice(key, 1);
         this.setState({savedHomes : homes});
