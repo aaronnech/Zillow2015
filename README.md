@@ -10,6 +10,10 @@ CasualHome utilizes an aggregated data model and profile intelligence to only sh
 
 More curious about how this project works behind the scenes? Check out our diagrams to see how we collect and process the data, and dig into the code yourself. Maybe you'll find a useful component that you can use in your own application.  
 
+
+![CasualHome](https://github.com/aaronnech/Zillow2015/raw/master/ASSET/app.png)
+
+
 Technologies, APIs, and Datasets Utilized
 -----------------------------------------
 
