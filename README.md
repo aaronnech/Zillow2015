@@ -4,7 +4,7 @@ Description
 This is the CasualHome Project from two humble UW CSE Developers Aaron Nech(@aaronnech) and Daniel Noteboom(@djnoteboom) for the Zillow Winter 2015 Hackathon.
 
 
-CasualHome is a mobile application that is fun and relaxing to use to search for a home during any amount of time. While using the app, a personalized profile will be learned over use (swiping homes, taking quizes, and filling out demographic information). It utilizes a aggregated data model and profile intelligence to only show you houses you're interested in from many sources.
+We believe that searching for a home should be relaxing, not stressful! CasualHome is a mobile application where we seek to learn as much about people as possible through their profile and help match them with homes and  for a home during any amount of time. While using the app, a personalized profile will be learned over use (swiping homes, taking quizes, and filling out demographic information). It utilizes a aggregated data model and profile intelligence to only show you houses you're interested in from many sources.
 
 Technologies, APIs, and Datasets Utilized
 -----------------------------------------

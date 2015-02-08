@@ -153,7 +153,6 @@ body, html {
 	padding: 20px;
 }
 
-button
 
 .saved-home img.remove {
 	float: right;
@@ -314,7 +313,12 @@ input {
 
 }
 
+.card li h2.IPQuestion {
+	margin-top: -5px;
+	font-size: 10px;
+}
 
+p
 
 @keyframes blink {  
     0% { background: #ade0e7; }
