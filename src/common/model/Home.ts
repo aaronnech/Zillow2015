@@ -15,6 +15,7 @@ class Home {
 	public getImage() : string { return this.builder.getImage(); }
 	public getRentPrice() : number { return this.builder.getRentPrice(); }
 	public getBuyPrice() : number { return this.builder.getBuyPrice(); }
+	public getAddress() : string { return this.builder.getAddress(); }
 	public getLink() : string { return this.builder.getLink(); }
 	public getLat() : number { return this.builder.getLat(); }
 	public getLon() : number { return this.builder.getLon(); }
@@ -24,6 +25,7 @@ class Home {
 		return {
 			'description' : this.builder.getDescription(),
 			'image' : this.builder.getImage(),
+			'address' : this.builder.getAddress(),
 			'rentPrice' : this.builder.getRentPrice(),
 			'buyPrice' : this.builder.getBuyPrice(),
 			'link' : this.builder.getLink(),

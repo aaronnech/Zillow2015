@@ -10,19 +10,14 @@ import HomeSafetyMetaPipeline = require('./pipeline/HomeSafetyMetaPipeline');
  */
 class Harvester {
 	private sourcePipelines : Pipeline[];
-	private metaPipelines : Pipeline[];
 	private db : any;
 	private runningCount : number;
 	private finishedCallback : Function;
-	private metaRunning : number;
 
 	constructor(db : any) {
-		this.metaRunning = 0;
 		this.sourcePipelines = [
 			new CraigslistPipeline(),
 			new AccessibleKingCountyPipeline()
-		];
-		this.metaPipelines = [
 		];
 		this.db = db;
 	}
@@ -46,46 +41,53 @@ class Harvester {
 	 * @param {any} result   The resultant data
 	 */
 	private onFinishPipeline(pipeline : Pipeline, result : any) {
+		var metaRunning = 0;
+
+		console.log('Starting Meta Pipelines:  on ' + result.length + ' homes');
+		this.runningCount++;
 		// Post-process data source
 		for (var i = 0; i < result.length; i++) {
 			// Tag the data source on the home
 			result[i].source = pipeline.getName();
-
-			this.metaRunning += this.metaPipelines.length;
-
+			var metaPipelines = [
+				new HomeSafetyMetaPipeline()
+			];
 			// Run all meta pipelines on these sources
-			for (var j = 0; j < this.metaPipelines.length; j++) {
-				var meta = this.metaPipelines[j];
+			for (var j = 0; j < metaPipelines.length; j++) {
+				var meta = metaPipelines[j];
 
 				meta.initialize(result[i]);
 
+				metaRunning++;
 				// Closure up the index
 				((meta, i, result) => {
 					meta.run((pipeline, metaTagged) => {
-						this.metaRunning--;
-
-						console.log('Finished meta pipeline : ' + pipeline.getName());
-						console.log('Meta Pipelines remaining : ' + this.metaRunning);
-
+						metaRunning--;
 						result[i] = metaTagged;
 					});
 				})(meta, i, result);
 			}
 		}
 
-
-		// Do nothing while the meta pipelines are running
-		while (this.metaRunning > 0) {}
-
-		// Insert data into database
-		this.db.insert(result, () => {
-			// Check to see if we are done
-			this.runningCount--;
-			console.log(this.runningCount + " Pipelines left");
-			if (this.runningCount == 0) {
-				this.finishedCallback();
+		var wait = (() => {
+			if (metaRunning > 0) {
+				setTimeout(wait, 100);
+			} else {
+				console.log("Finished Meta Pipeline");
+				console.log('-------------INSERT : ' + result.length + ' documents');
+				// Insert data into database
+				this.db.insert(result, (err) => {
+					console.log("Insertion finished.");
+					this.runningCount--;
+					if (this.runningCount == 0) {
+						console.log("Harvester done. Calling back.");
+						this.finishedCallback();
+					}
+				});
 			}
 		});
+
+		setTimeout(wait, 100);
 	}
 
 	/**
@@ -110,8 +112,8 @@ class Harvester {
 			for (var i = 0; i < this.sourcePipelines.length; i++) {
 				console.log("Starting Pipeline: " + this.sourcePipelines[i].getName());
 				this.sourcePipelines[i].run((pipeline, result) => {
+					this.runningCount--;
 					console.log("Finished Pipeline: " + pipeline.getName());
-					console.log("Inserting Pipeline: " + pipeline.getName());
 					this.onFinishPipeline(pipeline, result);
 				});
 			}

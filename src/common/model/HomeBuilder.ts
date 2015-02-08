@@ -10,6 +10,7 @@ class HomeBuilder {
 	private lat : number;
 	private lon : number;
 	private accessibility : any;
+	private address : string;
 
 	// Constructor
 	constructor() {}
@@ -38,10 +39,16 @@ class HomeBuilder {
 	public getLat() : number { return this.lat; }
 	public getLon() : number { return this.lon; }
 	public getAccessibility() : any { return this.accessibility; }
+	public getAddress() : string { return this.address; }
 
 	// Setters
 	public setAccessibility(accessibility : any) : HomeBuilder {
 		this.accessibility = accessibility;
+		return this;
+	}
+
+	public setAddress(address : string) : HomeBuilder {
+		this.address = address;
 		return this;
 	}
 

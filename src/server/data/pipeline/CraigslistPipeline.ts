@@ -47,7 +47,6 @@ class CraigslistPipeline implements Pipeline {
 	 * @param {any} $      crawler virtual DOM construction parameter
 	 */
 	private processPage(error, result, $) {
-		console.log('Craigslist Pipeline: Processing page');
 		var rows = $('p.row');
 		this.postsLeft += rows.length;
 		rows.each((index, e) => {
@@ -66,7 +65,7 @@ class CraigslistPipeline implements Pipeline {
             	'timeStamp' : timeStamp,
             	'description' : description,
             	'rentPrice' : price,
-            	'locationString' : location,
+            	'address' : location,
             	'link' : link
             });
 
@@ -96,13 +95,11 @@ class CraigslistPipeline implements Pipeline {
 	 * @param {any} $      crawler virtual DOM construction parameter
 	 */
 	private processDetailPage(index : number, error, result, $) {
-		console.log('Craigslist Pipeline: Processing detail page for item index ' + index);
 		
 		this.data[index].lon = $('#map').data('longitude');
 		this.data[index].lat = $('#map').data('latitude');
 
 		this.postsLeft--;
-		console.log('posts left: ' + this.postsLeft + ' pages left: ' + this.pagesLeft);
 		if (this.postsLeft == 0 && this.pagesLeft == 0) {
 			this.clientCallback(this, this.data);
 		}

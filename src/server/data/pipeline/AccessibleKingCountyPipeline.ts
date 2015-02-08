@@ -36,6 +36,7 @@ class AccessibleKingCountyPipeline implements Pipeline {
 			var loc : any = row[row.length - 1];
 
 			// Access indicies
+			var address = row.length - 2;
 			var lon = loc.length - 3;
 			var lat = loc.length - 4;
 			var taken = 10;
@@ -45,7 +46,8 @@ class AccessibleKingCountyPipeline implements Pipeline {
 				result.push({
 						'lat' : Number(loc[lat]),
 						'lon' : Number(loc[lon]),
-						'description' : row[desc]
+						'description' : row[desc],
+						'address' : row[address]
 					});
 			}
 		}
