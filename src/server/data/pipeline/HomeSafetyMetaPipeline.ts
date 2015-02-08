@@ -1,3 +1,5 @@
+import Pipeline = require('./Pipeline');
+
 /**
  * Annotates housing with a safety rating between 0-1 depending on
  * statistics generated from other datasets about the area.

@@ -49,7 +49,7 @@ class CraigslistPipeline implements Pipeline {
 	private processPage(error, result, $) {
 		console.log('Craigslist Pipeline: Processing page');
 		var rows = $('p.row');
-		this.postsLeft += rows.length - 1;
+		this.postsLeft += rows.length;
 		rows.each((index, e) => {
             var elem = $(e);
 
