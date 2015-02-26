@@ -25,12 +25,12 @@ Client
 * React JS
 * Browserify
 * JQuery
+* HammerJS
 * Cordova (PhoneGap)
 
 Server
 
 * TypeScript
-* HammerJS
 * ExpressJS
 * MongoDB
 
